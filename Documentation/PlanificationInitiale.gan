@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="TPI News site" company="CPNV" webLink="https://cpnv.ch" view-date="2022-04-29" view-index="0" gantt-divider-location="444" resource-divider-location="300" version="3.1.3103" locale="fr_FR">
+<?xml version="1.0" encoding="UTF-8"?><project name="TPI - Création d'un site web d'information" company="Centre Professionnel du Nord Vaudois (CPNV)" webLink="https://cpnv.ch/" view-date="2022-04-29" view-index="0" gantt-divider-location="444" resource-divider-location="300" version="3.1.3103" locale="fr_FR">
     <description/>
     <view zooming-state="default:1" id="gantt-chart">
         <field id="tpd3" name="Nom" width="271" order="0"/>
