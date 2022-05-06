@@ -1,0 +1,19 @@
+Strategie
+
+* Hébergement (LAMP)
+* Données présentes (en gros 20 articles, etc. données réel)
+
+
+
+DB
+
+* Nouvelle table 'auteurs'
+* email unique 
+* Seulement ID en clé (FK pas clé primaire)
+* Laision commentaire 1,1 - 0,1
+* Taille username et email et categorie
+
+
+Tests
+ 
+* MLD -> copie MCD
