@@ -18,3 +18,43 @@ function home()
     $_GET['action'] = "home";
     require "view/home.php";
 }
+
+/**
+ * temporary function to display the article page
+ */
+function article()
+{
+    require "view/article.php";
+}
+
+/**
+ * temporary function 
+ */
+function categories()
+{
+    require "view/category.php";
+}
+
+/**
+ * temporary function
+ */
+function search()
+{
+    require 'view/search-result.php';
+}
+
+/**
+ * temporary function
+ */
+function about()
+{
+    require 'view/about.php';
+}
+
+/**
+ * temporary function
+ */
+function contact()
+{
+    require 'view/contact.php';
+}

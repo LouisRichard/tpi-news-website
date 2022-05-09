@@ -20,6 +20,21 @@ if (isset($_GET['action'])) {
         case 'home':
             home();
             break;
+        case 'article':
+            article();
+            break;
+        case 'categories':
+            categories();
+            break;
+        case 'search':
+            search();
+            break;
+        case 'about':
+            about();
+            break;
+        case 'contact':
+            contact();
+            break;
         default:
             home();
     }
