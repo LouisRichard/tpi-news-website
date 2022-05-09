@@ -20,4 +20,4 @@ TPI - News website done is the context of my CS studies
       * [GanttProject](https://www.ganttproject.biz/)
 * Other
   * [cmder](https://cmder.net/) - Terminal Emulator
-
+  * [Paint.net](https://www.getpaint.net/download.html) - Image modifications
