@@ -12,6 +12,7 @@ TPI - News website done is the context of my CS studies
   * Design
     * Database
       * [AnalyseSI](https://framalibre.org/content/analysesi) - MCD
+      * [Looping](https://www.looping-mcd.fr/) - MCD (latest)
       * [MySQL Workbench](https://www.mysql.com/products/workbench/) - MLD
     * Mockups
       * [Pencil](https://pencil.evolus.vn/)
