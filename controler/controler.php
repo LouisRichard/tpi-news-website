@@ -58,3 +58,37 @@ function contact()
 {
     require 'view/contact.php';
 }
+
+
+/**
+ * This function is designed to redirect the user to the register form if no registerRequest is empty
+ * If register request is not null, it will test the values, extract them and register the user
+ * If the values aren't good to register the user, the user will be redirected to the register form with an error
+ * @param $registerRequest containing result from a register request
+ */
+function register($registerRequest)
+{
+    if (!empty($registerRequest['username']) && !empty($registerRequest['password']) && !empty($registerRequest['confirm']) && !empty($registerRequest['email'])) {
+        $username = $registerRequest['username'];
+        $email = $registerRequest['email'];
+        $password = $registerRequest['password'];
+        $confirm = $registerRequest['confirm'];
+
+        if ($password == $confirm) {
+            require_once "model/userManager.php";
+            $corr = registerNewAccount($username, $email, $password);
+            if ($corr) {
+                require "view/home.php";
+            } else {
+                require_once "model/exception/RegisterException.php";
+                throw new FailedToRegisterUserException("Une erreur c'est produite lors de l'execution de la requête");
+            }
+        } else {
+            require_once "model/exception/RegisterException.php";
+            throw new PasswordsDoNotMatchException("Les mots de passes entrés ne sont pas identiques");
+        }
+    } else {
+        require_once "model/exceptions/RegisterException.php";
+        throw new RegisterException();
+    }
+}

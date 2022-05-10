@@ -3,13 +3,12 @@
 /**
  * This php file is designed to manage SQL connexion with the database
  * Author   : louis.richard@tutanota.com
- * Project  : PreTPI - Maths games
+ * Project  : tpi-news-website
  * Created  : MAY. 10 2022
  * Info     : This file has been adapted from another project : https://github.com/Havachi/ProjetWEB-DB-LJACorp
  *
  * Source       :   https://github.com/LouisRichard/tpi-news-website
  */
-
 
 #region Query management
 
@@ -24,7 +23,7 @@ function executeQuerySelect($query)
 
     $dbConnexion = openDBConnexion(); //open database connexion
     if ($dbConnexion != null) {
-        $statement = $dbConnexion->prepare($query); //prepare query
+        $statement = $dbConnexion->prepare($query);
         $statement->execute(); //execute query
         $queryResult = $statement->fetchAll(); //prepare result for client
     }
@@ -113,7 +112,7 @@ function openDBConnexion()
         $tempDbConnexion = new PDO($dsn, $userName, $userPwd);
     } catch (PDOException $exception) {
         require_once "exception/DatabaseException.php";
-        //throw new DatabaseException();
+        throw new DatabaseException();
     }
 
     return $tempDbConnexion;

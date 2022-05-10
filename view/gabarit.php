@@ -22,6 +22,11 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
+    <!-- Modal and bootstrap stuff -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
     <!-- Favicons -->
     <link href="assets/img/favicon.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -91,9 +96,12 @@
             </nav><!-- .navbar -->
 
             <div class="position-relative">
-                <a href="#" class="mx-2"><span class="bi-facebook"></span></a>
-                <a href="#" class="mx-2"><span class="bi-twitter"></span></a>
-                <a href="#" class="mx-2"><span class="bi-instagram"></span></a>
+                <a href="#login" class="trigger-btn" data-toggle="modal">
+                    <button type="button" class="btn btn-outline-dark">
+                        <i class="bi-arrow-right-square-fill me-1"></i>
+                        Login
+                    </button>
+                </a>
 
                 <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -106,12 +114,79 @@
                         <button class="btn js-search-close"><span class="bi-x"></span></button>
                     </form>
                 </div><!-- End Search Form -->
-
             </div>
-
         </div>
 
     </header><!-- End Header -->
+
+    <!-- Modal Login -->
+    <!-- Adapted from https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=elegant-modal-login-form-with-avatar-icon -->
+    <div id="login" class="modal fade">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Login</h4>
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="index.php?action=login" id="loginForm" method="post">
+                        <div class="form-group">
+                            <label for="text">Login</label>
+                            <input type="text" class="form-control" name="login" placeholder="Login" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <button class="btn btn-outline-dark login-btn g-recaptcha" data-sitekey="6LfzEeceAAAAANIpg2Cc_whPo9y8wHNak4f8xSZz" data-callback='onSubmit' data-action='submit'>Login</button>
+                        </div>
+                        <a href="#register" class="trigger-btn" data-toggle="modal">Pas encore de compte? Créez-en un!</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL -->
+
+    <!-- Modal register -->
+    <!-- Adapted from https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=elegant-modal-login-form-with-avatar-icon -->
+    <div id="register" class="modal fade">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Register</h4>
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="index.php?action=register" id="registerForm" method="post">
+                        <div class="form-group">
+                            <label for="text">Nom d'utilisateur</label>
+                            <input type="text" class="form-control" name="username" placeholder="JohnDoe123" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Adresse Email</label>
+                            <input type="email" class="form-control" name="email" placeholder="example@domaine.com" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm">Confirmez le mot de passe</label>
+                            <input type="password" class="form-control" name="confirm" placeholder="Password" required="required">
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <button action='submit'>Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL -->
 
     <main id="main">
 

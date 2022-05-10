@@ -35,6 +35,10 @@ if (isset($_GET['action'])) {
         case 'contact':
             contact();
             break;
+
+        case 'register':
+            register($_POST);
+            break;
         default:
             home();
     }
