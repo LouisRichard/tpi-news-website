@@ -19,7 +19,7 @@
  * @param string $password : password in clear - Not encrypted yet
  * @return bool|null
  */
-function registerNewAccount($username, $email, $password)
+function registerNewUser($username, $email, $password)
 {
     $result = false;
     $strSeparator = '\'';

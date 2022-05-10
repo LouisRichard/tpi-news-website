@@ -76,7 +76,7 @@ function register($registerRequest)
 
         if ($password == $confirm) {
             require_once "model/userManager.php";
-            $corr = registerNewAccount($username, $email, $password);
+            $corr = registerNewUser($username, $email, $password);
             if ($corr) {
                 require "view/home.php";
             } else {
