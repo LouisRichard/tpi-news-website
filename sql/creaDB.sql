@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema news
+-- Schema mydb
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema news
+-- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `news` DEFAULT CHARACTER SET utf8 ;
-USE `news` ;
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
 
 -- -----------------------------------------------------
--- Table `news`.`Category`
+-- Table `mydb`.`Category`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `news`.`Category` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Category` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`))
@@ -25,9 +25,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `news`.`Authors`
+-- Table `mydb`.`Authors`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `news`.`Authors` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Authors` (
   `id` INT NOT NULL,
   `name` VARCHAR(50) NOT NULL,
   `firstname` VARCHAR(50) NOT NULL,
@@ -36,9 +36,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `news`.`Articles`
+-- Table `mydb`.`Articles`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `news`.`Articles` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Articles` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `abstract` TEXT NOT NULL,
   `article` TEXT NOT NULL,
@@ -52,21 +52,21 @@ CREATE TABLE IF NOT EXISTS `news`.`Articles` (
   INDEX `fk_Articles_Authors1_idx` (`Authors_id` ASC) VISIBLE,
   CONSTRAINT `fk_Articles_Category1`
     FOREIGN KEY (`Category_id`)
-    REFERENCES `news`.`Category` (`id`)
+    REFERENCES `mydb`.`Category` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Articles_Authors1`
     FOREIGN KEY (`Authors_id`)
-    REFERENCES `news`.`Authors` (`id`)
+    REFERENCES `mydb`.`Authors` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `news`.`Users`
+-- Table `mydb`.`Users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `news`.`Users` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(150) NOT NULL,
@@ -80,33 +80,31 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `news`.`Comments`
+-- Table `mydb`.`Comments`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `news`.`Comments` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Comments` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `content` TEXT NOT NULL,
   `Users_id` INT NOT NULL,
   `Articles_id` INT NOT NULL,
   `Comments_id` INT NOT NULL,
-  `Comments_Users` INT NOT NULL,
-  `Comments_Articles` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Comments_Users_idx` (`Users_id` ASC) VISIBLE,
   INDEX `fk_Comments_Articles1_idx` (`Articles_id` ASC) VISIBLE,
-  INDEX `fk_Comments_Comments1_idx` (`Comments_id` ASC, `Comments_Users` ASC, `Comments_Articles` ASC) VISIBLE,
+  INDEX `fk_Comments_Comments1_idx` (`Comments_id` ASC) VISIBLE,
   CONSTRAINT `fk_Comments_Users`
     FOREIGN KEY (`Users_id`)
-    REFERENCES `news`.`Users` (`id`)
+    REFERENCES `mydb`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Comments_Articles1`
     FOREIGN KEY (`Articles_id`)
-    REFERENCES `news`.`Articles` (`id`)
+    REFERENCES `mydb`.`Articles` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Comments_Comments1`
-    FOREIGN KEY (`Comments_id` , `Comments_Users` , `Comments_Articles`)
-    REFERENCES `news`.`Comments` (`id` , `Users_id` , `Articles_id`)
+    FOREIGN KEY (`Comments_id`)
+    REFERENCES `mydb`.`Comments` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
