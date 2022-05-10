@@ -18,6 +18,10 @@ TPI - News website done is the context of my CS studies
       * [Pencil](https://pencil.evolus.vn/)
     * Planning 
       * [GanttProject](https://www.ganttproject.biz/)
+* Code
+  * Visual Studio Code - IDE
+  * PHP
+  * MySQL
 * Other
   * [cmder](https://cmder.net/) - Terminal Emulator
   * [Paint.net](https://www.getpaint.net/download.html) - Image modifications
