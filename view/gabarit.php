@@ -142,7 +142,7 @@
                         <div class="form-group">
                             <button class="btn btn-outline-dark login-btn g-recaptcha" data-sitekey="6LfzEeceAAAAANIpg2Cc_whPo9y8wHNak4f8xSZz" data-callback='onSubmit' data-action='submit'>Login</button>
                         </div>
-                        <a href="#register" class="trigger-btn" data-toggle="modal">Pas encore de compte? Créez-en un!</a>
+                        <a href="#register" class="trigger-btn" data-dismiss="modal" data-toggle="modal">Pas encore de compte? Créez-en un!</a>
                     </form>
                 </div>
             </div>
@@ -179,7 +179,7 @@
                         </div>
                         <br />
                         <div class="form-group">
-                            <button action='submit'>Register</button>
+                            <input type="submit" value="Submit">
                         </div>
                     </form>
                 </div>
