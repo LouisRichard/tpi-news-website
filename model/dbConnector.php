@@ -91,7 +91,7 @@ function executeQueryDelete($query)
 
 /**
  * this function is design to open a database connexion with the SQL server
- * @return DatabaseException|NULL 
+ * @return PDO|DatabaseException 
  */
 function openDBConnexion()
 {
@@ -101,7 +101,7 @@ function openDBConnexion()
     $hostname = 'localhost';
     $port = 3306;
     $charset = 'utf8';
-    $dbName = 'news';
+    $dbName = 'mydb';
     $userName = 'root';
     $userPwd = '';
     $dsn = $sqlDriver . ':host=' . $hostname . ';dbname=' . $dbName . ';port=' . $port . ';charset=' . $charset;

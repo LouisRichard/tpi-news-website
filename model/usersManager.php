@@ -1,42 +1,42 @@
 
-<?
+<?php
 /**
  * This file is designed to manage all operation regarding user's management
  * Author   : louis.richard@tutanota.com
  * Project  : tpi-news-website
- * Created  : MAR. 14 2022
+ * Created  : MAY. 11 2022
  * Info     : This file is directly adapted from another project : PreTPI-MathGames
  *
  * Source       :   https://github.com/LouisRichard/tpi-news-website
  */
 
 
-
 /**
  * This function is designed to register a new account
- * @param string $username
- * @param string $email
- * @param string $password : password in clear - Not encrypted yet
+ * @param mixed $username
+ * @param mixed $email
+ * @param mixed $password : password in clear - Not encrypted yet
  * @return bool|null
  */
 function registerNewUser($username, $email, $password)
 {
     $result = false;
-    $strSeparator = '\'';
+
+    $str = '\'';
+
     $userHashPsw = password_hash($password, PASSWORD_DEFAULT);
 
-    $registerQuery = 'INSERT INTO users (name, email, password, enabled, admin, activationCode) VALUES 
-    (' . $strSeparator . $username . $strSeparator . ',' . $strSeparator . $email . $strSeparator . ',' . $strSeparator . $userHashPsw . $strSeparator . ',0,0,' . $strSeparator . "whatever at this point" . $strSeparator . ")";
+    $registerQuery = 'INSERT INTO Users (name, email, password, activationCode) VALUES
+    (' . $str . $username . $str . ',' . $str . $email . $str . ',' . $str . $userHashPsw . $str . ',' . $str . "whatever" . $str . ')';
 
     require_once 'model/dbConnector.php';
     $queryResult = executeQueryInsert($registerQuery);
     if ($queryResult === null) {
-        //require_once "exception/RegisterException.php";
-        //throw new FailedToRegisterUserException();
+        throw new Exception();
     } else {
         if ($queryResult) {
             $result = $queryResult;
         }
+        return $result;
     }
-    return $result;
 }
