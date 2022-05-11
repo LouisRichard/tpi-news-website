@@ -11,37 +11,36 @@
  */
 
 session_start();
-require "controler/controler.php";
 
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
 
     switch ($action) {
         case 'home':
-            home();
+            require "view/home.php";
             break;
         case 'article':
-            article();
+            require "view/article.php";
             break;
         case 'categories':
-            categories();
+            require "view/category.php";
             break;
         case 'search':
-            search();
+            require "view/search-result.php";
             break;
         case 'about':
-            about();
+            require "view/about.php";
             break;
         case 'contact':
-            contact();
+            require "view/contact.php";
             break;
-
         case 'register':
+            require_once "controler/users.php";
             register($_POST);
             break;
         default:
-            home();
+            require "view/home.php";
     }
 } else {
-    home();
+    require "view/home.php";
 }
