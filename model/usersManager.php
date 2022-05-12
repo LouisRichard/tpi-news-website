@@ -25,18 +25,33 @@ function registerNewUser($username, $email, $password)
     $str = '\'';
 
     $userHashPsw = password_hash($password, PASSWORD_DEFAULT);
+    $activationCode = md5($email);
 
-    $registerQuery = 'INSERT INTO Users (name, email, password, activationCode) VALUES
-    (' . $str . $username . $str . ',' . $str . $email . $str . ',' . $str . $userHashPsw . $str . ',' . $str . "whatever" . $str . ')';
+    $registerQuery = 'INSERT INTO Users (name, email, password, activationCode) VALUES (' . $str . $username . $str . ',' . $str . $email . $str . ',' . $str . $userHashPsw . $str . ',' . $str . $activationCode . $str . ')';
 
     require_once 'model/dbConnector.php';
     $queryResult = executeQueryInsert($registerQuery);
     if ($queryResult === null) {
-        throw new Exception();
+        throw new FailedToRegisterUserException();
     } else {
         if ($queryResult) {
+            require_once "controler/emails.php"
+;            verifyEmail($username, $email, $activationCode);
             $result = $queryResult;
         }
         return $result;
     }
+}
+
+
+/**
+ * Activate a user within the database
+ * @param string $code : Verification code
+ * @return array : users infos now that the account is activated
+ */
+function activateUser($code)
+{
+    $verificationQuery = 'UPDATE Users SET enabled = 1 WHERE activationCode = "' . $code . '"';
+    require_once 'model/dbConnector.php';
+    return(executeQueryUpdate($verificationQuery));
 }

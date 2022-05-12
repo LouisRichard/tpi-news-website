@@ -38,6 +38,9 @@ if (isset($_GET['action'])) {
             require_once "controler/users.php";
             register($_POST);
             break;
+        case 'verify':
+            require_once "controler/users.php";
+            verify($_GET['v']);
         default:
             require "view/home.php";
     }
