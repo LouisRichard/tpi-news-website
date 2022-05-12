@@ -3,20 +3,20 @@
 /**
  * This php file is designed to manage all operation regarding users management
  * Author   : louis.richard@tutanota.com
- * Project  : Projet WEB + BDD
+ * Project  : tpi-news-websiter
  * Created  : MAY. 11 2022
  *
  * Source       :   https://github.com/tpi-news-website
  */
 
-require 'model/usersManager.php';
-require 'model/exceptions/RegisterException.php';
-
 /**
  * This function is designed to redirect the user to the register form if no registerRequest is empty
  * If register request is not null, it will test the values, extract them and register the user
  * If the values aren't good to register the user, the user will be redirected to the register form with an error
- * @param $registerRequest containing result from a register request
+ * @param array $registerRequest containing result from a register request
+ * @throws UserAlreadyExistException
+ * @throws PasswordsDoNotMatchException
+ * @throws EmptyRegisterFormException
  */
 function register($registerRequest)
 {
@@ -31,18 +31,24 @@ function register($registerRequest)
         if ($password == $confirm) {
 
             try {
+                require_once "model/usersManager.php";
                 $corr = registerNewUser($username, $email, $password);
             } catch (PDOException $e) {
-                throw new UserAlreadyExistsException();
+                require_once "model/exceptions/RegisterException.php";
+                throw new UserAlreadyExistsException("Cet utilisateur existe déjà");
+            } catch (FailedToRegisterUserException $e) {
+                throw new FailedToRegisterUserException("Une erreur c'est produite lors de l'enregistrement de votre utilisateur. Veulliez réessayer");
             }
             if ($corr) {
-                require "view/home.php";
+                require "view/confirm.php";
             }
         } else {
-            throw new PasswordsDoNotMatchException();
+            require_once "model/exceptions/RegisterException.php";
+            throw new PasswordsDoNotMatchException("Les mots de passes entrés ne sont pas identiques");
         }
     } else {
-        throw new EmptyRegisterFormException();
+        require_once "model/exceptions/RegisterException.php";
+        throw new EmptyRegisterFormException("Un ou plusieurs des champs requis pour s'inscrire sont vides");
     }
 }
 
@@ -50,15 +56,17 @@ function register($registerRequest)
 /**
  * This function is designed to set a user to active using the verification code
  * @param string $code : Verification code
+ * @throws RegisterException
  */
 function verify($code)
 {
     try {
-        if (activateUser($code)) {
-            echo "<script>console.log('working')</script>";
-            require "view/home.php";
+        require_once "model/usersManager.php";
+        $corr = activateUser($code);
+        if (isset($corr) && $corr != null) {
+            require "view/thankyou.php";
         }
     } catch (PDOException $e) {
-        throw new RegisterException();
+        throw new RegisterException("Une erreur c'est produite lors du procédé. Veulliez réessayer");
     }
 }

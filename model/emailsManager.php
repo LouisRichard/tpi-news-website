@@ -1,10 +1,12 @@
 <?php
 
 /**
- * Author : Louis Richard, Michael Pedroletti
- * Creation Date : 26.DEC.2021
- * Last modification : 26.DEC.2021 :
- *      Created the file and modified the credentials
+ * This file is designed to manage everything regarding emails (verifications, etc)
+ * Authors  : Louis Richard, Michael Pedroletti
+ * Project  : tpi-news-website
+ * Created  : 26.DEC.2021
+ *
+ * Source       :   https://github.com/tpi-news-website
  */
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -16,16 +18,14 @@ require './phpmailer/PHPMailer.php';
 require './phpmailer/SMTP.php';
 
 /**
- * This function is designed to send the verification email to the user
- * @param string $username : username of the user
- * @param string $email : email address of the new user
- * @param string $code verification code
+ * This function is designed to create the email that will be sent to the user for confirmation
+ * @param string $username
+ * @param string $email
+ * @param $code - Confirmation code
  */
-function verifyemail($username, $email, $code)
+function verifyEmail($username, $email, $code)
 {
-    $pswFileName = ".psw";
-    $pswFile = fopen("$pswFileName", "r");
-    $psw = fread($pswFile, fileSize($pswFileName));
+    $subject = $username . " - Confirm you email address";
 
     $message =
         "<html>
@@ -39,6 +39,24 @@ function verifyemail($username, $email, $code)
         <a href='https://tpi.wewfamily.ch/index.php?action=verify&v=" . $code . "'>https://tpi.wewfamily.ch/index.php?action=verify&v=" . $code . "</a>
         </body>
     </html>";
+
+    sendEmail($email, $username, $subject, $message);
+}
+
+
+/**
+ * This function is designed to send the verification email to the user
+ * @param string $email
+ * @param string $username
+ * @param string $subject
+ * @param string $message - Message in HTML format
+ */
+function sendEmail($email, $username, $subject, $message)
+{
+    // Gets SMTP user password from .psw file 
+    $pswFileName = ".psw";
+    $pswFile = fopen("$pswFileName", "r");
+    $psw = fread($pswFile, fileSize($pswFileName));
 
     $mail = new PHPMailer(true);
     //Server settings
@@ -65,9 +83,8 @@ function verifyemail($username, $email, $code)
 
     //content
     $mail->isHTML(true);
-    $mail->Subject = $username . " Confirm you email address";
+    $mail->Subject = $subject;
     $mail->Body = $message;
 
     $mail->send();
-    $msg = "message sent";
 }

@@ -35,8 +35,8 @@ function registerNewUser($username, $email, $password)
         throw new FailedToRegisterUserException();
     } else {
         if ($queryResult) {
-            require_once "controler/emails.php"
-;            verifyEmail($username, $email, $activationCode);
+            require_once "model/emailsManager.php";
+            verifyEmail($username, $email, $activationCode);
             $result = $queryResult;
         }
         return $result;
@@ -53,5 +53,6 @@ function activateUser($code)
 {
     $verificationQuery = 'UPDATE Users SET enabled = 1 WHERE activationCode = "' . $code . '"';
     require_once 'model/dbConnector.php';
-    return(executeQueryUpdate($verificationQuery));
+    $result = executeQueryUpdate($verificationQuery);
+    return $result;
 }

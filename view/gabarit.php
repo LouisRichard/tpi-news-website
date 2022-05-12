@@ -18,7 +18,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>ZenBlog Bootstrap Template - Index</title>
+    <title><?= $title ?></title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -52,7 +52,7 @@
   * Template URL: https://bootstrapmade.com/zenblog-bootstrap-blog-template/
   * Author: BootstrapMade.com
   * License: https:///bootstrapmade.com/license/
-  ======================================================== -->
+======================================================== -->
 </head>
 
 <body>
