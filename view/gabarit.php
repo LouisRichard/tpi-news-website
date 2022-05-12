@@ -99,7 +99,11 @@
                 <a href="#login" class="trigger-btn" data-toggle="modal">
                     <button type="button" class="btn btn-outline-dark">
                         <i class="bi-arrow-right-square-fill me-1"></i>
-                        Login
+                        <?php if (isset($_SESSION['username'])) { ?>
+                            <?= $_SESSION['username'];?>
+                        <?php } else { ?>
+                            Se connecter
+                        <?php } ?>
                     </button>
                 </a>
 

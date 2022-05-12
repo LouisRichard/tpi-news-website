@@ -32,7 +32,7 @@ function register($registerRequest)
 
             try {
                 require_once "model/usersManager.php";
-                $corr = registerNewUser($username, $email, $password);
+                $corr = registerNewUser($username, strtolower($email), $password);
             } catch (PDOException $e) {
                 require_once "model/exceptions/RegisterException.php";
                 throw new UserAlreadyExistsException("Cet utilisateur existe déjà");
@@ -69,4 +69,46 @@ function verify($code)
     } catch (PDOException $e) {
         throw new RegisterException("Une erreur c'est produite lors du procédé. Veulliez réessayer");
     }
+}
+
+
+/**
+ * This function is designed to log in the user if the credentials are rights and if the user has confirmed their email address
+ * @param array $loginDetails : Content of the login form sent via POST
+ */
+function login($loginDetails)
+{
+    if (!empty($loginDetails['login']) && !empty($loginDetails['password'])) {
+        $login = $loginDetails['login'];
+        $password = $loginDetails['password'];
+
+        require_once "model/userManager.php";
+        $corr = checkLogin($login, $password);
+        $pswCorrect = $corr[0];
+        $uname = $corr[1];
+        if ($pswCorrect) {
+            require_once "model/usersManager.php";
+            $activated = checkActivated($login);
+            if($activated){
+                createSession($uname);
+                require "view/home.php";
+            }
+            else {
+                require_once "model/exceptions/LoginException.php";
+                throw new UserNotActivatedException("Vous n'avez pas encore confirmé votre email");
+            }
+        } else {
+            require_once "model/exception/LoginException.php";
+            throw new WrongLoginOrPasswordException("Identifiant out mot de passe incorrecte");
+        }
+    } else {
+        require_once "model/exception/LoginException.php";
+        throw new EmptyLoginFormException("Formulaire de connexion incomplet");
+    }
+}
+
+
+function createSession($username)
+{
+    $_SESSION['username'] = $username;
 }
