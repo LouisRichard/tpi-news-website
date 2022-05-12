@@ -18,7 +18,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>ZenBlog Bootstrap Template - Index</title>
+    <title><?= $title ?></title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -52,7 +52,7 @@
   * Template URL: https://bootstrapmade.com/zenblog-bootstrap-blog-template/
   * Author: BootstrapMade.com
   * License: https:///bootstrapmade.com/license/
-  ======================================================== -->
+======================================================== -->
 </head>
 
 <body>
@@ -142,7 +142,7 @@
                         <div class="form-group">
                             <button class="btn btn-outline-dark login-btn g-recaptcha" data-sitekey="6LfzEeceAAAAANIpg2Cc_whPo9y8wHNak4f8xSZz" data-callback='onSubmit' data-action='submit'>Login</button>
                         </div>
-                        <a href="#register" class="trigger-btn" data-toggle="modal">Pas encore de compte? Créez-en un!</a>
+                        <a href="#register" class="trigger-btn" data-dismiss="modal" data-toggle="modal">Pas encore de compte? Créez-en un!</a>
                     </form>
                 </div>
             </div>
@@ -179,7 +179,7 @@
                         </div>
                         <br />
                         <div class="form-group">
-                            <button action='submit'>Register</button>
+                            <input type="submit" value="Submit">
                         </div>
                     </form>
                 </div>

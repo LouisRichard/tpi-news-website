@@ -91,7 +91,8 @@ function executeQueryDelete($query)
 
 /**
  * this function is design to open a database connexion with the SQL server
- * @return DatabaseException|NULL 
+ * @return PDO
+ * @throws DatabaseException
  */
 function openDBConnexion()
 {
@@ -111,8 +112,8 @@ function openDBConnexion()
     try {
         $tempDbConnexion = new PDO($dsn, $userName, $userPwd);
     } catch (PDOException $exception) {
-        require_once "exception/DatabaseException.php";
-        throw new DatabaseException();
+        require_once "model/exceptions/DatabaseException.php";
+        throw new FailedToReachDatabaseException();
     }
 
     return $tempDbConnexion;
