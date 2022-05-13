@@ -21,7 +21,7 @@
 function register($registerRequest)
 {
     //variable set
-    if (isset($registerRequest['username']) && isset($registerRequest['email']) && isset($registerRequest['password']) && isset($registerRequest['confirm'])) {
+    if ($registerRequest['username'] != "" && $registerRequest['email'] != "" && $registerRequest['password'] != "" && $registerRequest['confirm'] != "") {
         if (filter_var($registerRequest['email'], FILTER_VALIDATE_EMAIL)) {
 
             //extract register parameters
