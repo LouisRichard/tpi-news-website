@@ -1,0 +1,20 @@
+Reporté au sprint suivant : 
+* Ajout d'articles
+
+A revoir avant done :
+* commentaires sur le site
+
+Prochain sprint : 
+* Ajout d'articles
+* Commentaires
+* Ajout de thèmes
+* Filtrages
+
+Retrospective :
+Le bon:
+Le travail demandé est bien effectué, si ce n'est l'ajout d'articles. Le reste est bon.
+La méthode de travail agile correspond mieux a ma manière de travailler 
+
+Le moins bon:
+Est arrivé en retard aux cours deux fois
+Beaucoup de debug 
