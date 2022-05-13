@@ -36,3 +36,8 @@ class UserNotActivatedException extends LoginException
 {
     protected $message = "This user hasn't confirmed their email yet";
 }
+
+class InvalidEmailAddressException extends LoginException
+{
+    protected $message = "The entered email address isn't valid";
+}

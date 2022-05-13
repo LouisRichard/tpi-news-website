@@ -82,28 +82,33 @@ function verify($code)
 function login($loginDetails)
 {
     if (!empty($loginDetails['login']) && !empty($loginDetails['password'])) {
-        $login = $loginDetails['login'];
-        $password = $loginDetails['password'];
+        if (filter_var($loginDetails['login'], FILTER_VALIDATE_EMAIL)) {
+            $login = $loginDetails['login'];
+            $password = $loginDetails['password'];
 
-        require_once "model/usersManager.php";
-        $corr = checkLogin($login, $password);
-        $pswCorrect = $corr;
-        if ($pswCorrect) {
             require_once "model/usersManager.php";
-            $activated = checkActivated($login);
-            if ($activated) {
+            $corr = checkLogin($login, $password);
+            $pswCorrect = $corr;
+            if ($pswCorrect) {
                 require_once "model/usersManager.php";
-                createSession(getUserInfos($login));
+                $activated = checkActivated($login);
+                if ($activated) {
+                    require_once "model/usersManager.php";
+                    createSession(getUserInfos($login));
+                } else {
+                    require_once "model/exceptions/LoginException.php";
+                    throw new UserNotActivatedException("Vous n'avez pas encore confirmé votre email");
+                }
             } else {
                 require_once "model/exceptions/LoginException.php";
-                throw new UserNotActivatedException("Vous n'avez pas encore confirmé votre email");
+                throw new WrongLoginOrPasswordException("Identifiant out mot de passe incorrecte");
             }
         } else {
-            require_once "model/exception/LoginException.php";
-            throw new WrongLoginOrPasswordException("Identifiant out mot de passe incorrecte");
+            require_once "model/exceptions/LoginException.php";
+            throw new InvalidEmailAddressException("L'adresse email entrée n'est pas valide");
         }
     } else {
-        require_once "model/exception/LoginException.php";
+        require_once "model/exceptions/LoginException.php";
         throw new EmptyLoginFormException("Formulaire de connexion incomplet");
     }
     require "view/home.php";
