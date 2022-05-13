@@ -91,8 +91,8 @@ function executeQueryDelete($query)
 
 /**
  * this function is design to open a database connexion with the SQL server
- * @return PDO
- * @throws DatabaseException
+ * @return PDO open database connexion
+ * @throws FailedToReachDatabaseException
  */
 function openDBConnexion()
 {

@@ -65,6 +65,7 @@ function activateUser($code)
  * @param string $login : The username for the login
  * @param string $userPsw : The password used for the login
  * @return bool $result : true if correct
+ * @throws WrongLoginOrPasswordException
  */
 function checkLogin($login, $userPsw)
 {
@@ -92,6 +93,7 @@ function checkLogin($login, $userPsw)
  * This function is designed to check wether or not the user has confirmed their email address
  * @param string $email
  * @return int 1 if activated, 0 if not
+ * @throws LoginException
  */
 function checkActivated($email)
 {
@@ -118,6 +120,7 @@ function checkActivated($email)
  * This function is designed to get the user's type and name on login
  * @param string email
  * @return array name=>username, 'admin'=>usertype : 1 if admin 
+ * @throws LoginException
  */
 function getUserInfos($email)
 {

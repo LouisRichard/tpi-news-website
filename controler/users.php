@@ -15,7 +15,9 @@
  * If the values aren't good to register the user, the user will be redirected to the register form with an error
  * @param array $registerRequest containing result from a register request
  * @throws UserAlreadyExistException
+ * @throws FailedToRegisterUserException
  * @throws PasswordsDoNotMatchException
+ * @throws InvalidEmailAddressException
  * @throws EmptyRegisterFormException
  */
 function register($registerRequest)
@@ -78,6 +80,10 @@ function verify($code)
 /**
  * This function is designed to log in the user if the credentials are rights and if the user has confirmed their email address
  * @param array $loginDetails : Content of the login form sent via POST
+ * @throws UserNotActivatedException
+ * @throws WrongLoginOrPasswordException
+ * @throws InvalidEmailAddressException
+ * @throws EmptyLoginFormException
  */
 function login($loginDetails)
 {
