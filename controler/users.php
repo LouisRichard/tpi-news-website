@@ -22,29 +22,34 @@ function register($registerRequest)
 {
     //variable set
     if (isset($registerRequest['username']) && isset($registerRequest['email']) && isset($registerRequest['password']) && isset($registerRequest['confirm'])) {
+        if (filter_var($registerRequest['email'], FILTER_VALIDATE_EMAIL)) {
 
-        //extract register parameters
-        $username = $registerRequest['username'];
-        $email = $registerRequest['email'];
-        $password = $registerRequest['password'];
-        $confirm = $registerRequest['confirm'];
-        if ($password == $confirm) {
+            //extract register parameters
+            $username = $registerRequest['username'];
+            $email = $registerRequest['email'];
+            $password = $registerRequest['password'];
+            $confirm = $registerRequest['confirm'];
+            if ($password == $confirm) {
 
-            try {
-                require_once "model/usersManager.php";
-                $corr = registerNewUser($username, strtolower($email), $password);
-            } catch (PDOException $e) {
+                try {
+                    require_once "model/usersManager.php";
+                    $corr = registerNewUser($username, strtolower($email), $password);
+                } catch (PDOException $e) {
+                    require_once "model/exceptions/RegisterException.php";
+                    throw new UserAlreadyExistsException("Cet utilisateur existe déjà");
+                } catch (FailedToRegisterUserException $e) {
+                    throw new FailedToRegisterUserException("Une erreur c'est produite lors de l'enregistrement de votre utilisateur. Veulliez réessayer");
+                }
+                if ($corr) {
+                    require "view/confirm.php";
+                }
+            } else {
                 require_once "model/exceptions/RegisterException.php";
-                throw new UserAlreadyExistsException("Cet utilisateur existe déjà");
-            } catch (FailedToRegisterUserException $e) {
-                throw new FailedToRegisterUserException("Une erreur c'est produite lors de l'enregistrement de votre utilisateur. Veulliez réessayer");
-            }
-            if ($corr) {
-                require "view/confirm.php";
+                throw new PasswordsDoNotMatchException("Les mots de passes entrés ne sont pas identiques");
             }
         } else {
             require_once "model/exceptions/RegisterException.php";
-            throw new PasswordsDoNotMatchException("Les mots de passes entrés ne sont pas identiques");
+            throw new InvalidEmailAddressException("L'adresse email entrée n'est pas valide");
         }
     } else {
         require_once "model/exceptions/RegisterException.php";
@@ -86,11 +91,10 @@ function login($loginDetails)
         if ($pswCorrect) {
             require_once "model/usersManager.php";
             $activated = checkActivated($login);
-            if($activated){
+            if ($activated) {
                 require_once "model/usersManager.php";
                 createSession(getUserInfos($login));
-            }
-            else {
+            } else {
                 require_once "model/exceptions/LoginException.php";
                 throw new UserNotActivatedException("Vous n'avez pas encore confirmé votre email");
             }
@@ -120,7 +124,8 @@ function createSession($infos)
 /**
  * This function is designed to destroy the user's session
  */
-function logout(){
+function logout()
+{
     $_SESSION = array();
     session_destroy();
     require "view/home.php";
