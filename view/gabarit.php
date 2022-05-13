@@ -103,11 +103,18 @@
                             Se connecter
                         </button>
                     </a>
-                <?php } else { ?>
+                <?php } else if ($_SESSION['admin'] == 0) { ?>
                     <a href="index.php?action=logout">
                         <button type="button" class="btn btn-outline-dark">
                             <i class="bi-arrow-right-square-fill me-1"></i>
                             Se déconnecter - <?= $_SESSION['name'] ?>
+                        </button>
+                    </a>
+                <?php } else { ?>
+                    <a href="index.php?action=logout">
+                        <button type="button" class="btn btn-outline-dark">
+                            <i class="bi-arrow-right-square-fill me-1"></i>
+                            Se déconnecter - <?= $_SESSION['name'] ?> (adm)
                         </button>
                     </a>
                 <?php } ?>
@@ -147,8 +154,8 @@
                 <div class="modal-body">
                     <form action="index.php?action=login" id="loginForm" method="post">
                         <div class="form-group">
-                            <label for="text">Adresse email</label>
-                            <input type="text" class="form-control" name="login" placeholder="Login" required="required">
+                            <label for="email">Adresse email</label>
+                            <input type="email" class="form-control" name="login" placeholder="Login" required="required">
                         </div>
                         <div class="form-group">
                             <label for="password">Mot de passe</label>

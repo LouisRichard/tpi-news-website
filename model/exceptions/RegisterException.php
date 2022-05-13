@@ -34,3 +34,8 @@ class EmptyRegisterFormException extends RegisterException
 {
     protected $message = "The register form is empty. Please fill it out and try again";
 }
+
+class InvalidEmailAddressException extends RegisterException
+{
+    protected $message = "The entered email address isn't valid";
+}
