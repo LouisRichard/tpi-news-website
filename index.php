@@ -36,7 +36,15 @@ if (isset($_GET['action'])) {
             break;
         case 'register':
             require_once "controler/users.php";
-            register($_POST);
+            try {
+                register($_POST);
+            } catch (RegisterException $e) {
+                $_SESSION['errorMessage'] = $e->getMessage();
+                require "view/home.php";
+            } catch (DatabaseException $e) {
+                $_SESSION['errorMessage'] = $e->getMessage();
+                require "view/home.php";
+            }
             break;
         case 'verify':
             require_once "controler/users.php";
@@ -44,7 +52,15 @@ if (isset($_GET['action'])) {
             break;
         case 'login':
             require_once "controler/users.php";
-            login($_POST);
+            try {
+                login($_POST);
+            } catch (LoginException $e) {
+                $_SESSION['errorMessage'] = $e->getMessage();
+                require "view/home.php";
+            } catch (DatabaseException $e) {
+                $_SESSION['errorMessage'] = $e->getMessage();
+                require "view/home.php";
+            }
             break;
         case 'logout':
             require_once "controler/users.php";
