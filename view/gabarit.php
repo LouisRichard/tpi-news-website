@@ -18,7 +18,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>ZenBlog Bootstrap Template - Index</title>
+    <title><?= $title ?></title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -52,7 +52,7 @@
   * Template URL: https://bootstrapmade.com/zenblog-bootstrap-blog-template/
   * Author: BootstrapMade.com
   * License: https:///bootstrapmade.com/license/
-  ======================================================== -->
+======================================================== -->
 </head>
 
 <body>
@@ -96,13 +96,28 @@
             </nav><!-- .navbar -->
 
             <div class="position-relative">
-                <a href="#login" class="trigger-btn" data-toggle="modal">
-                    <button type="button" class="btn btn-outline-dark">
-                        <i class="bi-arrow-right-square-fill me-1"></i>
-                        Login
-                    </button>
-                </a>
-
+                <?php if (!$_SESSION['name']) { ?>
+                    <a href="#login" class="trigger-btn" data-toggle="modal">
+                        <button type="button" class="btn btn-outline-dark">
+                            <i class="bi-arrow-right-square-fill me-1"></i>
+                            Se connecter
+                        </button>
+                    </a>
+                <?php } else if ($_SESSION['admin'] == 0) { ?>
+                    <a href="index.php?action=logout">
+                        <button type="button" class="btn btn-outline-dark">
+                            <i class="bi-arrow-right-square-fill me-1"></i>
+                            Se déconnecter - <?= $_SESSION['name'] ?>
+                        </button>
+                    </a>
+                <?php } else { ?>
+                    <a href="index.php?action=logout">
+                        <button type="button" class="btn btn-outline-dark">
+                            <i class="bi-arrow-right-square-fill me-1"></i>
+                            Se déconnecter - <?= $_SESSION['name'] ?> (adm)
+                        </button>
+                    </a>
+                <?php } ?>
                 <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
                 <i class="bi bi-list mobile-nav-toggle"></i>
 
@@ -116,7 +131,15 @@
                 </div><!-- End Search Form -->
             </div>
         </div>
-
+        <?php if ($_SESSION['errorMessage']) : ?>
+            <div class="alert alert-danger alert-dismissible fade show">
+                <div class="text-center">
+                    <?= $_SESSION['errorMessage'] ?>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php unset($_SESSION['errorMessage']);
+        endif; ?>
     </header><!-- End Header -->
 
     <!-- Modal Login -->
@@ -125,14 +148,14 @@
         <div class="modal-dialog modal-login">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Login</h4>
+                    <h4 class="modal-title">Se connecter</h4>
                     <button type="button" class="btn btn-outline-dark" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <form action="index.php?action=login" id="loginForm" method="post">
                         <div class="form-group">
-                            <label for="text">Login</label>
-                            <input type="text" class="form-control" name="login" placeholder="Login" required="required">
+                            <label for="email">Adresse email</label>
+                            <input type="email" class="form-control" name="login" placeholder="Login" required="required">
                         </div>
                         <div class="form-group">
                             <label for="password">Mot de passe</label>
@@ -140,9 +163,9 @@
                         </div>
                         <br />
                         <div class="form-group">
-                            <button class="btn btn-outline-dark login-btn g-recaptcha" data-sitekey="6LfzEeceAAAAANIpg2Cc_whPo9y8wHNak4f8xSZz" data-callback='onSubmit' data-action='submit'>Login</button>
+                            <button class="btn btn-outline-dark login-btn g-recaptcha" data-sitekey="6LfzEeceAAAAANIpg2Cc_whPo9y8wHNak4f8xSZz" data-callback='onSubmit' data-action='submit'>Se connecter</button>
                         </div>
-                        <a href="#register" class="trigger-btn" data-toggle="modal">Pas encore de compte? Créez-en un!</a>
+                        <a href="#register" class="trigger-btn" data-dismiss="modal" data-toggle="modal">Pas encore de compte? Créez-en un!</a>
                     </form>
                 </div>
             </div>
@@ -156,7 +179,7 @@
         <div class="modal-dialog modal-login">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Register</h4>
+                    <h4 class="modal-title">S'enregistrer</h4>
                     <button type="button" class="btn btn-outline-dark" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -179,8 +202,9 @@
                         </div>
                         <br />
                         <div class="form-group">
-                            <button action='submit'>Register</button>
+                            <button class="btn btn-outline-dark login-btn g-recaptcha" data-sitekey="6LfzEeceAAAAANIpg2Cc_whPo9y8wHNak4f8xSZz" data-callback='onSubmit' data-action='submit'>S'enregistrer</button>
                         </div>
+                        <a href="#login" class="trigger-btn" data-dismiss="modal" data-toggle="modal">Vous avez déjà un compte? Connectez-vous!</a>
                     </form>
                 </div>
             </div>
