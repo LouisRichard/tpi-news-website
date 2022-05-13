@@ -29,16 +29,16 @@ function verifyEmail($username, $email, $code)
 
     $message =
         "<html>
-        <body>" .
-        $username . ", <br/> 
-        Thank you for creating an account with us.<br/>
-        Before you can log in, you need to verify your email address.<br/><br/>
-        
-        You can do so using <a href='tpi.wewfamily.ch/index.php?action=verify&v=" . $code . "'>this link</a>
-        <br/>Or you can use the link below :<br/>
-        <a href='https://tpi.wewfamily.ch/index.php?action=verify&v=" . $code . "'>https://tpi.wewfamily.ch/index.php?action=verify&v=" . $code . "</a>
-        </body>
-    </html>";
+            <body>" .
+                $username . ", <br/> 
+                Merci d'avoir créé un compte chez nous.<br/>
+                Avant de pouvoir vous connecter, vous devez confirmer votre adresse email.<br/><br/>
+                
+                Pour ce faire, vous pouvez utiliser <a href='tpi.wewfamily.ch/index.php?action=verify&v=" . $code . "'>ce liens</a>
+                <br/>Ou vous pouvez utiliser le liens si dessous :<br/>
+                <a href='https://tpi.wewfamily.ch/index.php?action=verify&v=" . $code . "'>https://tpi.wewfamily.ch/index.php?action=verify&v=" . $code . "</a>
+            </body>
+        </html>";
 
     sendEmail($email, $username, $subject, $message);
 }

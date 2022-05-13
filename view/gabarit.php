@@ -124,7 +124,15 @@
                 </div><!-- End Search Form -->
             </div>
         </div>
-
+        <?php if ($_SESSION['errorMessage']) : ?>
+            <div class="alert alert-danger alert-dismissible fade show">
+                <div class="text-center">
+                    <?= $_SESSION['errorMessage'] ?>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php unset($_SESSION['errorMessage']);
+        endif; ?>
     </header><!-- End Header -->
 
     <!-- Modal Login -->
@@ -133,13 +141,13 @@
         <div class="modal-dialog modal-login">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Login</h4>
+                    <h4 class="modal-title">Se connecter</h4>
                     <button type="button" class="btn btn-outline-dark" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <form action="index.php?action=login" id="loginForm" method="post">
                         <div class="form-group">
-                            <label for="text">Login</label>
+                            <label for="text">Adresse email</label>
                             <input type="text" class="form-control" name="login" placeholder="Login" required="required">
                         </div>
                         <div class="form-group">
@@ -148,7 +156,7 @@
                         </div>
                         <br />
                         <div class="form-group">
-                            <button class="btn btn-outline-dark login-btn g-recaptcha" data-sitekey="6LfzEeceAAAAANIpg2Cc_whPo9y8wHNak4f8xSZz" data-callback='onSubmit' data-action='submit'>Login</button>
+                            <button class="btn btn-outline-dark login-btn g-recaptcha" data-sitekey="6LfzEeceAAAAANIpg2Cc_whPo9y8wHNak4f8xSZz" data-callback='onSubmit' data-action='submit'>Se connecter</button>
                         </div>
                         <a href="#register" class="trigger-btn" data-dismiss="modal" data-toggle="modal">Pas encore de compte? Créez-en un!</a>
                     </form>
@@ -164,7 +172,7 @@
         <div class="modal-dialog modal-login">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Register</h4>
+                    <h4 class="modal-title">S'enregistrer</h4>
                     <button type="button" class="btn btn-outline-dark" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -187,8 +195,9 @@
                         </div>
                         <br />
                         <div class="form-group">
-                            <input type="submit" value="Submit">
+                            <button class="btn btn-outline-dark login-btn g-recaptcha" data-sitekey="6LfzEeceAAAAANIpg2Cc_whPo9y8wHNak4f8xSZz" data-callback='onSubmit' data-action='submit'>S'enregistrer</button>
                         </div>
+                        <a href="#login" class="trigger-btn" data-dismiss="modal" data-toggle="modal">Vous avez déjà un compte? Connectez-vous!</a>
                     </form>
                 </div>
             </div>
