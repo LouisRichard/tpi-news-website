@@ -21,7 +21,7 @@ require './phpmailer/SMTP.php';
  * This function is designed to create the email that will be sent to the user for confirmation
  * @param string $username
  * @param string $email
- * @param $code - Confirmation code
+ * @param string $code - Confirmation code
  */
 function verifyEmail($username, $email, $code)
 {
