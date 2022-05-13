@@ -63,9 +63,7 @@ function verify($code)
     try {
         require_once "model/usersManager.php";
         $corr = activateUser($code);
-        if (isset($corr) && $corr != null) {
-            require "view/thankyou.php";
-        }
+        require "view/thankyou.php";
     } catch (PDOException $e) {
         throw new RegisterException("Une erreur c'est produite lors du procédé. Veulliez réessayer");
     }
@@ -82,16 +80,15 @@ function login($loginDetails)
         $login = $loginDetails['login'];
         $password = $loginDetails['password'];
 
-        require_once "model/userManager.php";
+        require_once "model/usersManager.php";
         $corr = checkLogin($login, $password);
-        $pswCorrect = $corr[0];
-        $uname = $corr[1];
+        $pswCorrect = $corr;
         if ($pswCorrect) {
             require_once "model/usersManager.php";
             $activated = checkActivated($login);
             if($activated){
-                createSession($uname);
-                require "view/home.php";
+                require_once "model/usersManager.php";
+                createSession(getUserInfos($login));
             }
             else {
                 require_once "model/exceptions/LoginException.php";
@@ -105,10 +102,26 @@ function login($loginDetails)
         require_once "model/exception/LoginException.php";
         throw new EmptyLoginFormException("Formulaire de connexion incomplet");
     }
+    require "view/home.php";
 }
 
 
-function createSession($username)
+/**
+ * This function is designed to add the user informations on the SESSION variable
+ * @param array $infos=>'username' and $infos=>'admin'
+ */
+function createSession($infos)
 {
-    $_SESSION['username'] = $username;
+    $_SESSION['name'] = $infos['name'];
+    $_SESSION['admin'] = $infos['admin'];
+}
+
+
+/**
+ * This function is designed to destroy the user's session
+ */
+function logout(){
+    $_SESSION = array();
+    session_destroy();
+    require "view/home.php";
 }

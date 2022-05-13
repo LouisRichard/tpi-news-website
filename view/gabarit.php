@@ -96,17 +96,21 @@
             </nav><!-- .navbar -->
 
             <div class="position-relative">
-                <a href="#login" class="trigger-btn" data-toggle="modal">
-                    <button type="button" class="btn btn-outline-dark">
-                        <i class="bi-arrow-right-square-fill me-1"></i>
-                        <?php if (isset($_SESSION['username'])) { ?>
-                            <?= $_SESSION['username'];?>
-                        <?php } else { ?>
+                <?php if (!$_SESSION['name']) { ?>
+                    <a href="#login" class="trigger-btn" data-toggle="modal">
+                        <button type="button" class="btn btn-outline-dark">
+                            <i class="bi-arrow-right-square-fill me-1"></i>
                             Se connecter
-                        <?php } ?>
-                    </button>
-                </a>
-
+                        </button>
+                    </a>
+                <?php } else { ?>
+                    <a href="index.php?action=logout">
+                        <button type="button" class="btn btn-outline-dark">
+                            <i class="bi-arrow-right-square-fill me-1"></i>
+                            Se déconnecter - <?= $_SESSION['name'] ?>
+                        </button>
+                    </a>
+                <?php } ?>
                 <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
                 <i class="bi bi-list mobile-nav-toggle"></i>
 

@@ -41,6 +41,15 @@ if (isset($_GET['action'])) {
         case 'verify':
             require_once "controler/users.php";
             verify($_GET['v']);
+            break;
+        case 'login':
+            require_once "controler/users.php";
+            login($_POST);
+            break;
+        case 'logout':
+            require_once "controler/users.php";
+            logout();
+            break;
         default:
             require "view/home.php";
     }
