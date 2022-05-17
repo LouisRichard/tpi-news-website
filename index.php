@@ -11,7 +11,8 @@
  */
 
 session_start();
-
+require_once("controler/articles.php");
+$categories = getCategories();
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
 
@@ -65,6 +66,14 @@ if (isset($_GET['action'])) {
         case 'logout':
             require_once "controler/users.php";
             logout();
+            break;
+        case 'createArticle':
+            $authors = getAuthors();
+            require "view/createArticle.php";
+            break;
+        case 'addArticle':
+            require_once "controler/articles.php";
+            addArticle($_POST);
             break;
         default:
             require "view/home.php";
