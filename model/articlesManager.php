@@ -33,11 +33,11 @@ function pullAuthors()
     return executeQuerySelect($authorQuery);
 }
 
-function addArticleInDB($abstract, $article, $category, $filePath)
+function addArticleInDB($abstract, $article, $category, $filePath, $author)
 {
     $str = '\'';
 
-    $query = "INSERT INTO articles (abstract, article, image, date, Category_id, Authors_id) VALUES (" . $str . $abstract . $str . "," . $str . $article . $str . "," . $str . $filePath . $str . "," . $str . date('Y-m-d H:i:s') . $str . "," . $category . ", 1)";
+    $query = "INSERT INTO articles (abstract, article, image, date, Category_id, Authors_id) VALUES (" . $str . $abstract . $str . "," . $str . $article . $str . "," . $str . $filePath . $str . "," . $str . date('Y-m-d H:i:s') . $str . "," . $category . "," . $str . $author .$str . ")";
 
     require_once "model/dbConnector.php";
     return executeQueryInsert($query);

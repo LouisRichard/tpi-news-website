@@ -36,10 +36,11 @@ function addArticle($request)
         $abstract = $request['abstract'];
         $article = $request['article'];
         $categoryID = $request['category'];
+        $author = $request['author'];
         //no checks for now, I just want it to work
         if(move_uploaded_file($_FILES['articleImage']['tmp_name'], $imageFile)) {
             require_once "model/articlesManager.php";
-            if(addArticleInDB($abstract, $article, $categoryID, $imageFile)){
+            if(addArticleInDB($abstract, $article, $categoryID, $imageFile, $author)){
                 header('Location: index.php?action=home');
             }
         }
