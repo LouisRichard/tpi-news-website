@@ -28,7 +28,7 @@ ENGINE = InnoDB;
 -- Table `news`.`Authors`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `news`.`Authors` (
-  `id` INT NOT NULL AUTO_INCREMENT,,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `firstname` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`))
