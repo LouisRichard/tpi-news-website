@@ -13,3 +13,6 @@
 
 # Sensitive data
 .psw
+
+# junk data
+assets/img/articles/*
