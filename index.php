@@ -12,15 +12,19 @@
 
 session_start();
 require_once("controler/articles.php");
-$categories = getCategories();
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
+    $categories = getCategories();
 
     switch ($action) {
         case 'home':
+            require_once "controler/articles.php";
+            $homeArticles = getHomeArticles();
             require "view/home.php";
             break;
-        case 'article':
+        case 'showArticle':
+            require_once "controler/articles.php";
+            $article = getOneArticle($_GET['aid']);
             require "view/article.php";
             break;
         case 'categories':
@@ -78,15 +82,14 @@ if (isset($_GET['action'])) {
             } catch (ArticleException $e) {
                 $_SESSION['errorMessage'] = $e->getMessage();
                 header('location: index.php?action=createArticle');
-            }
-            catch (LoginException $e){
+            } catch (LoginException $e) {
                 $_SESSION['errorMessage'] = $e->getMessage();
                 header('location: index.php?action=home');
             }
             break;
         default:
-            require "view/home.php";
+            header('location: index.php?action=home');
     }
 } else {
-    require "view/home.php";
+    header('location: index.php?action=home');
 }

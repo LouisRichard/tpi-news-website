@@ -43,6 +43,7 @@ function addArticle($request)
 
         $abstract = str_replace("'", "\'", $request['abstract']);
         $article = str_replace("'", "\'", $request['article']);
+        $article = str_replace("\n", "<br/>", $article);
         $categoryID = $request['category'];
         $author = $request['author'];
         if ($_FILES['articleImage']['size'] < 5000000) { //check if file size is below 5MB
@@ -77,3 +78,18 @@ function addArticle($request)
     }
 }
 
+/**
+ * This function is designed to return articles 
+ * @return array arr[][] articles infos 
+ */
+function getHomeArticles()
+{
+    require_once "model/articlesManager.php";
+    return fetchHomeArticles();
+}
+
+function getOneArticle($articleID)
+{
+    require_once "model/articlesManager.php";
+    return fetchOneArticle($articleID);
+}

@@ -41,3 +41,30 @@ function addArticleInDB($abstract, $article, $category, $filePath, $author)
     require_once "model/dbConnector.php";
     return executeQueryInsert($query);
 }
+
+/**
+ * This function is designed to get the 20 latest articles for the home page
+ * @return array arr[][] 20 articles 
+ */
+function fetchHomeArticles()
+{
+    $articleQuery = "SELECT id, abstract, image FROM Articles ORDER BY date DESC LIMIT 6";
+
+    require_once "model/dbConnector.php";
+    return executeQuerySelect($articleQuery);
+}
+
+/**
+ * This function is designed to return the informations about one article
+ * @return array arr[]
+ */
+function fetchOneArticle($articleID)
+{
+    $articleQuery = "SELECT abstract, article, image, date, authors.name, authors.firstname, category.name
+                    FROM articles INNER JOIN authors on articles.Authors_id = authors.id
+                    INNER JOIN category on articles.Category_id = category.id
+                    WHERE articles.id = " . $articleID;
+    require_once "model/dbConnector.php";
+    return executeQuerySelect($articleQuery)[0];
+
+}
