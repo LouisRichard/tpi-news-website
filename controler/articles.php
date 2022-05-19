@@ -77,3 +77,18 @@ function addArticle($request)
     }
 }
 
+/**
+ * This function is designed to return articles 
+ * @return array arr[][] articles infos 
+ */
+function getHomeArticles()
+{
+    require_once "model/articlesManager.php";
+    return fetchHomeArticles();
+}
+
+function getOneArticle($articleID)
+{
+    require_once "model/articlesManager.php";
+    return fetchOneArticle($articleID);
+}
