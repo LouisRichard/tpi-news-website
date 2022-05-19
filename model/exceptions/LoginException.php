@@ -41,3 +41,8 @@ class InvalidEmailAddressException extends LoginException
 {
     protected $message = "The entered email address isn't valid";
 }
+
+class UserIsNotAdminException extends LogicException
+{
+    protected $message = "You need to be an administrator to access this feature";
+}

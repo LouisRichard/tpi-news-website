@@ -11,7 +11,8 @@
  */
 
 session_start();
-
+require_once("controler/articles.php");
+$categories = getCategories();
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
 
@@ -40,10 +41,10 @@ if (isset($_GET['action'])) {
                 register($_POST);
             } catch (RegisterException $e) {
                 $_SESSION['errorMessage'] = $e->getMessage();
-                require "view/home.php";
+                header('location: index.php?action=home');
             } catch (DatabaseException $e) {
                 $_SESSION['errorMessage'] = $e->getMessage();
-                require "view/home.php";
+                header('location: index.php?action=home');
             }
             break;
         case 'verify':
@@ -56,15 +57,32 @@ if (isset($_GET['action'])) {
                 login($_POST);
             } catch (LoginException $e) {
                 $_SESSION['errorMessage'] = $e->getMessage();
-                require "view/home.php";
+                header('location: index.php?action=home');
             } catch (DatabaseException $e) {
                 $_SESSION['errorMessage'] = $e->getMessage();
-                require "view/home.php";
+                header('location: index.php?action=home');
             }
             break;
         case 'logout':
             require_once "controler/users.php";
             logout();
+            break;
+        case 'createArticle':
+            $authors = getAuthors();
+            require "view/createArticle.php";
+            break;
+        case 'addArticle':
+            try {
+                require_once "controler/articles.php";
+                addArticle($_POST);
+            } catch (ArticleException $e) {
+                $_SESSION['errorMessage'] = $e->getMessage();
+                header('location: index.php?action=createArticle');
+            }
+            catch (LoginException $e){
+                $_SESSION['errorMessage'] = $e->getMessage();
+                header('location: index.php?action=home');
+            }
             break;
         default:
             require "view/home.php";

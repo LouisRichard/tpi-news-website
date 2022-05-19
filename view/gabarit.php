@@ -74,24 +74,17 @@
                     <li class="dropdown"><a href="index.php?action=categories"><span>Categories</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
                             <li><a href="index.php?action=search">Search Result</a></li>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Drop Down 2</a></li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
+                            <?php foreach ($categories as $category) { ?>
+                                <li><a href="index.php?action=showCategory&cat=<?=$category[0]?>"><?=$category[1]?></a></li>
+                            <?php } ?>
                         </ul>
                     </li>
 
                     <li><a href="index.php?action=about">About</a></li>
                     <li><a href="index.php?action=contact">Contact</a></li>
+                    <?php if($_SESSION['admin'] == 1) { ?>
+                        <li><a href="index.php?action=createArticle">Ajouter un article</a></li>
+                    <?php } ?>
                 </ul>
             </nav><!-- .navbar -->
 
