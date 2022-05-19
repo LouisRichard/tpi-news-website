@@ -43,6 +43,7 @@ function addArticle($request)
 
         $abstract = str_replace("'", "\'", $request['abstract']);
         $article = str_replace("'", "\'", $request['article']);
+        $article = str_replace("\n", "<br/>", $article);
         $categoryID = $request['category'];
         $author = $request['author'];
         if ($_FILES['articleImage']['size'] < 5000000) { //check if file size is below 5MB

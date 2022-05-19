@@ -11,7 +11,7 @@
  */
 
 ob_start();
-$title = "TPI - Contacte";
+$title = "TPI - Article";
 ?>
 
 
@@ -22,12 +22,14 @@ $title = "TPI - Contacte";
 
                 <!-- ======= Single Post Content ======= -->
                 <div class="single-post">
-                    <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span> <span><?= $article[3] ?></span></div>
+                    <div class="post-meta"><span class="date"><?= $article[6] ?></span> <span class="mx-1">&bullet;</span> <span><?= $article[3] ?></span></div>
                     <h2><?= $article[0] ?></h2>
                     <figure class="figure-img img-fluid rounded">
                         <img src="<?= $article[2] ?>" alt="" class="img-fluid">
                     </figure>
                     <p><?= $article[1] ?></p>
+                    <br /><br />
+                    <div class="post-meta"><span><?= $article[5] . " " . $article[4] ?></span></div>
                 </div><!-- End Single Post Content -->
 
                 <!-- ======= Comments ======= -->
