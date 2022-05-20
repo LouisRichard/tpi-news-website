@@ -82,6 +82,7 @@ function sendEmail($email, $username, $subject, $message)
     $mail->addAddress($email, $username);
 
     //content
+    $mail->CharSet = 'UTF-8';
     $mail->isHTML(true);
     $mail->Subject = $subject;
     $mail->Body = $message;
