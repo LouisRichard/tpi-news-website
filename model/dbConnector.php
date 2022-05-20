@@ -59,7 +59,6 @@ function executeQueryUpdate($query)
 function executeQueryInsert($query)
 {
     $queryResult = null;
-
     $dbConnexion = openDBConnexion(); //open database connexion
     if ($dbConnexion != null) {
         $statement = $dbConnexion->prepare($query); //prepare query
