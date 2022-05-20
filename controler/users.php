@@ -117,7 +117,7 @@ function login($loginDetails)
         require_once "model/exceptions/LoginException.php";
         throw new EmptyLoginFormException("Formulaire de connexion incomplet");
     }
-    require "view/home.php";
+    header('Location: index.php?action=home');
 }
 
 
