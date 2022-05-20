@@ -72,8 +72,14 @@ if (isset($_GET['action'])) {
             logout();
             break;
         case 'createArticle':
-            $authors = getAuthors();
-            require "view/createArticle.php";
+            if($_SESSION['admin'] == 1){
+                $authors = getAuthors();
+                require "view/createArticle.php";
+            }
+            else {
+                $_SESSION['errorMessage'] = "Vous devez être connecté en tant qu'administrateur pour acceder à cette feature";
+                header('location: index.php?action=home');
+            }
             break;
         case 'addArticle':
             try {
