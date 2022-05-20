@@ -88,6 +88,10 @@ function getHomeArticles()
     return fetchHomeArticles();
 }
 
+/**
+ * This function is designed to return a single article
+ * @return array arr[] articles data
+ */
 function getOneArticle($articleID)
 {
     require_once "model/articlesManager.php";
