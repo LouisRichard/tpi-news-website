@@ -74,7 +74,7 @@ function addArticle($request)
         }
     } else {
         require_once "model/exceptions/LoginException.php";
-        throw new UserIsNotAdminException("Vous devez être un administrateur pour acceder à cette feature");
+        throw new UserIsNotAdminException("Vous devez être connecté en tant qu'administrateur pour acceder à cette feature");
     }
 }
 
