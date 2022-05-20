@@ -29,3 +29,8 @@ class CouldNotSaveFileException extends ArticleException
 {
     protected $message = "The file couldn't be saved. Maybe it's name is invalid or the file already exists";
 }
+
+class EmptyArticleFormException extends ArticleException
+{
+    protected $message = "One or more of the requires inputs are empty";
+}
