@@ -27,6 +27,16 @@ if (isset($_GET['action'])) {
             $article = getOneArticle($_GET['aid']);
             require "view/article.php";
             break;
+        case 'like':
+            require_once "controler/articles.php";
+            likeArticle($_GET['aid']);
+            header('location: index.php?action=showArticle&aid='.$_GET['aid']);
+            break;
+        case 'dislike':
+            require_once "controler/articles.php";
+            dislikeArticle($_GET['aid']);
+            header('location: index.php?action=showArticle&aid='.$_GET['aid']);
+            break;
         case 'categories':
             require "view/category.php";
             break;

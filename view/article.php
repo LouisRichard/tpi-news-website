@@ -30,6 +30,7 @@ $title = "TPI - Article";
                     <p><?= $article[1] ?></p>
                     <br /><br />
                     <div class="post-meta"><span><?= $article[5] . " " . $article[4] ?></span></div>
+                    <a href="index.php?action=like&aid=<?=$_GET['aid']?>"><i class="bi bi-hand-thumbs-up"></i></a> / <a href="index.php?action=dislike&aid=<?=$_GET['aid']?>"><i class="bi bi-hand-thumbs-down"></i></a> - Score : <?=$article[7]?>
                 </div><!-- End Single Post Content -->
 
                 <!-- ======= Comments ======= -->

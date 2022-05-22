@@ -39,7 +39,7 @@ function addArticle($request)
 {
     if ($_SESSION['admin'] == 1) {
         $imageDir = "assets/img/articles/";
-        $imageFile = $imageDir . basename($_FILES['articleImage']['name']).date('ymdhis');
+        $imageFile = $imageDir . basename($_FILES['articleImage']['name']) . date('ymdhis');
 
         $abstract = str_replace("'", "\'", $request['abstract']);
         $article = str_replace("'", "\'", $request['article']);
@@ -101,4 +101,32 @@ function getOneArticle($articleID)
 {
     require_once "model/articlesManager.php";
     return fetchOneArticle($articleID);
+}
+
+/**
+ * This function is designed to increase the reaction on an article
+ */
+function likeArticle($articleID)
+{
+    if (isset($_SESSION['name'])) {
+        require_once "model/articlesManager.php";
+        increaseImpression($articleID);
+    } else {
+        require_once "model/exceptions/LoginException.php";
+        throw new UserIsNotLoggedInException("Vous devez vous connecter pour acceder a cette fonctionnalité");
+    }
+}
+
+/**
+ * This function is designed to decrease the reaction on an article
+ */
+function dislikeArticle($articleID)
+{
+    if (isset($_SESSION['name'])) {
+        require_once "model/articlesManager.php";
+        decreaseImpression($articleID);
+    } else {
+        require_once "model/exceptions/LoginException.php";
+        throw new UserIsNotLoggedInException("Vous devez vous connecter pour acceder a cette fonctionnalité");
+    }
 }

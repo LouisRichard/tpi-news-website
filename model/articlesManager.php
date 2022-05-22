@@ -60,11 +60,30 @@ function fetchHomeArticles()
  */
 function fetchOneArticle($articleID)
 {
-    $articleQuery = "SELECT abstract, article, image, date, authors.name, authors.firstname, category.name
+    $articleQuery = "SELECT abstract, article, image, date, authors.name, authors.firstname, category.name, reactions
                     FROM articles INNER JOIN authors on articles.Authors_id = authors.id
                     INNER JOIN category on articles.Category_id = category.id
                     WHERE articles.id = " . $articleID;
     require_once "model/dbConnector.php";
     return executeQuerySelect($articleQuery)[0];
+}
 
+/**
+ * This function is designed to increase de Reaction counter in the database
+ */
+function increaseImpression($articleID)
+{
+    $query = "UPDATE articles SET reactions = reactions+1 WHERE id = " . $articleID;
+    require_once "model/dbConnector.php";
+    return (executeQueryUpdate($query));
+}
+
+/**
+ * This function is designed to decrease the Reaction counter in the database
+ */
+function decreaseImpression($articleID)
+{
+    $query = "UPDATE articles SET reactions = reactions-1 WHERE id = " . $articleID;
+    require_once "model/dbConnector.php";
+    return (executeQueryUpdate($query));
 }
