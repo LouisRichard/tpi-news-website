@@ -106,8 +106,6 @@ function openDBConnexion()
     $userPwd = '';
     $dsn = $sqlDriver . ':host=' . $hostname . ';dbname=' . $dbName . ';port=' . $port . ';charset=' . $charset;
 
-
-    //if it's not like that, everything crashes, rly...
     try {
         $tempDbConnexion = new PDO($dsn, $userName, $userPwd);
     } catch (PDOException $exception) {

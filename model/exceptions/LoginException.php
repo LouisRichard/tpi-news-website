@@ -46,3 +46,8 @@ class UserIsNotAdminException extends LoginException
 {
     protected $message = "You need to be an administrator to access this feature";
 }
+
+class UserIsNotLoggedInException extends LoginException
+{
+    protected $message = "You need to log in to access this feature";
+}

@@ -34,12 +34,17 @@ function getAuthors()
 /**
  * This function is designed to add an article to the site
  * @param array $request
+ * @throws CouldNotSaveFileException
+ * @throws InvalidFileExtensionException
+ * @throws FileTooHeavyException
+ * @throws EmptyArticleFormException
+ * @throws UserIsNotAdminException
  */
 function addArticle($request)
 {
     if ($_SESSION['admin'] == 1) {
         $imageDir = "assets/img/articles/";
-        $imageFile = $imageDir . basename($_FILES['articleImage']['name']).date('ymdhis');
+        $imageFile = $imageDir . basename($_FILES['articleImage']['name']) . date('ymdhis');
 
         $abstract = str_replace("'", "\'", $request['abstract']);
         $article = str_replace("'", "\'", $request['article']);
@@ -101,4 +106,102 @@ function getOneArticle($articleID)
 {
     require_once "model/articlesManager.php";
     return fetchOneArticle($articleID);
+}
+
+/**
+ * This function is designed to increase the reaction on an article
+ * @param int $articleID article's id
+ * @throws UserIsNotLoggedInException
+ */
+function likeArticle($articleID)
+{
+    if (isset($_SESSION['name'])) {
+        require_once "model/articlesManager.php";
+        increaseImpression($articleID);
+    } else {
+        require_once "model/exceptions/LoginException.php";
+        throw new UserIsNotLoggedInException("Vous devez vous connecter pour acceder a cette fonctionnalité");
+    }
+}
+
+/**
+ * This function is designed to decrease the reaction on an article
+ * @param int $articleID article's id
+ * @throws UserIsNotLoggedInException
+ */
+function dislikeArticle($articleID)
+{
+    if (isset($_SESSION['name'])) {
+        require_once "model/articlesManager.php";
+        decreaseImpression($articleID);
+    } else {
+        require_once "model/exceptions/LoginException.php";
+        throw new UserIsNotLoggedInException("Vous devez vous connecter pour acceder a cette fonctionnalité");
+    }
+}
+
+/**
+ * this function designed to add a category to the website
+ * @param string $name Category name
+ * @throws UserIsNotAdminException
+ */
+function addCategory($name)
+{
+    if ($_SESSION['admin']) {
+        require_once "model/articlesManager.php";
+        newCategory($name);
+    } else {
+        require_once "model/exceptions/LoginException.php";
+        throw new UserIsNotAdminException("Vous devez être administrateur pour utiliser cette feature");
+    }
+}
+
+/**
+ * This function is designed to delete a category from the website in case you created it by accident or if no articles have been written for it
+ * @param int $catID category's id
+ * @throws UserIsNotAdminException
+ */
+function delCategory($catID)
+{
+    if ($_SESSION['admin']) {
+        require_once "model/articlesManager.php";
+        deleteCategory($catID);
+    } else {
+        require_once "model/exceptions/LoginException.php";
+        throw new UserIsNotAdminException("Vous devez être administrateur pour utiliser cette feature");
+    }
+}
+
+/**
+ * this function is designed to add a new user the the website
+ * @param array author's infos (first name, name)
+ * @throws UserIsNotAdminException
+ */
+function addAuthor($authorInfos)
+{
+    $firstname = $authorInfos['authorFirstName'];
+    $name = $authorInfos['authorName'];
+
+    if($_SESSION['admin']){
+        require_once "model/articlesManager.php";
+        createAuthor($firstname, $name);
+    }
+    else {
+        throw new UserIsNotAdminException("Vous devez être administrateur pour utiliser cette feature");
+    }
+}
+
+/**
+ * This function is designed to remove an author from the website
+ * @param int $authorID author's id
+ * @throws UserIsNotAdminException
+ */
+function delAuthor($authorID){
+    if ($_SESSION['admin']) {
+        require_once "model/articlesManager.php";
+        deleteAuthor($authorID);
+    } else {
+        require_once "model/exceptions/LoginException.php";
+        throw new UserIsNotAdminException("Vous devez être administrateur pour utiliser cette feature");
+    }
 }
