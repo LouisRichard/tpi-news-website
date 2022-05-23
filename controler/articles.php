@@ -130,3 +130,32 @@ function dislikeArticle($articleID)
         throw new UserIsNotLoggedInException("Vous devez vous connecter pour acceder a cette fonctionnalité");
     }
 }
+
+/**
+ * this function designed to add a category to the website
+ * @param string $name Category name
+ */
+function addCategory($name)
+{
+    if ($_SESSION['admin']) {
+        require_once "model/articlesManager.php";
+        newCategory($name);
+    } else {
+        require_once "model/exceptions/LoginException.php";
+        throw new UserIsNotAdminException("Vous devez être administrateur pour utiliser cette feature");
+    }
+}
+
+/**
+ * This function is designed to delete a category from the website in case you created it by accident or if no articles have been written for it
+ */
+function delCategory($catID)
+{
+    if ($_SESSION['admin']) {
+        require_once "model/articlesManager.php";
+        deleteCategory($catID);
+    } else {
+        require_once "model/exceptions/LoginException.php";
+        throw new UserIsNotAdminException("Vous devez être administrateur pour utiliser cette feature");
+    }
+}

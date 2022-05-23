@@ -11,7 +11,7 @@
  */
 
 ob_start();
-$title = "TPI - A propos";
+$title = "TPI - Confirmation";
 ?>
 
 <section>
