@@ -103,6 +103,13 @@ if (isset($_GET['action'])) {
                 header('location: index.php?action=home');
             }
             break;
+        case 'manageCategories':
+            if($_SESSION['admin']){
+                require_once "view/manageCategories.php";
+            } else {
+                $_SESSION['errorMessage'] = "Vous devez être administrateur pour acceder à cette page";
+                header('location: index.php?action=home');
+            }
         default:
             header('location: index.php?action=home');
     }

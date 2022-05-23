@@ -12,7 +12,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="utf-8">
@@ -84,6 +84,7 @@
                     <li><a href="index.php?action=contact">Contact</a></li>
                     <?php if($_SESSION['admin'] == 1) { ?>
                         <li><a href="index.php?action=createArticle">Ajouter un article</a></li>
+                        <li><a href="index.php?action=manageCategories">Gérer catégories</a></li>
                     <?php } ?>
                 </ul>
             </nav><!-- .navbar -->
