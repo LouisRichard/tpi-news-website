@@ -30,12 +30,12 @@ if (isset($_GET['action'])) {
         case 'like':
             require_once "controler/articles.php";
             likeArticle($_GET['aid']);
-            header('location: index.php?action=showArticle&aid='.$_GET['aid']);
+            header('location: index.php?action=showArticle&aid=' . $_GET['aid']);
             break;
         case 'dislike':
             require_once "controler/articles.php";
             dislikeArticle($_GET['aid']);
-            header('location: index.php?action=showArticle&aid='.$_GET['aid']);
+            header('location: index.php?action=showArticle&aid=' . $_GET['aid']);
             break;
         case 'categories':
             require "view/category.php";
@@ -82,11 +82,10 @@ if (isset($_GET['action'])) {
             logout();
             break;
         case 'createArticle':
-            if($_SESSION['admin'] == 1){
+            if ($_SESSION['admin'] == 1) {
                 $authors = getAuthors();
                 require "view/createArticle.php";
-            }
-            else {
+            } else {
                 $_SESSION['errorMessage'] = "Vous devez être connecté en tant qu'administrateur pour acceder à cette feature";
                 header('location: index.php?action=home');
             }
@@ -104,12 +103,23 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'manageCategories':
-            if($_SESSION['admin']){
+            if ($_SESSION['admin']) {
                 require_once "view/manageCategories.php";
             } else {
                 $_SESSION['errorMessage'] = "Vous devez être administrateur pour acceder à cette page";
                 header('location: index.php?action=home');
             }
+            break;
+        case "addCategory":
+            require_once "controler/articles.php";
+            addCategory($_POST['categoryName']);
+            header('Location: index.php?action=manageCategories');
+            break;
+        case "deleteCategory":
+            require_once "controler/articles.php";
+            delCategory($_GET['cat']);
+            header("Location: index.php?action=manageCategories");
+            break;
         default:
             header('location: index.php?action=home');
     }

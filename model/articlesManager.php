@@ -33,6 +33,15 @@ function pullAuthors()
     return executeQuerySelect($authorQuery);
 }
 
+/**
+ * This function is designed to add an article to the database
+ * @param string $abstract article abstract
+ * @param string $article the article itself
+ * @param int $category the article category's id
+ * @param string $filePath path to the image
+ * @param int $author Author's id
+ * @return array the new article
+ */
 function addArticleInDB($abstract, $article, $category, $filePath, $author)
 {
     $str = '\'';
@@ -56,6 +65,7 @@ function fetchHomeArticles()
 
 /**
  * This function is designed to return the informations about one article
+ * @param int $articleID ID of the article
  * @return array arr[]
  */
 function fetchOneArticle($articleID)
@@ -70,6 +80,8 @@ function fetchOneArticle($articleID)
 
 /**
  * This function is designed to increase de Reaction counter in the database
+ * @param int $articleID ID of the article
+ * @return array the article with the updated value
  */
 function increaseImpression($articleID)
 {
@@ -80,10 +92,36 @@ function increaseImpression($articleID)
 
 /**
  * This function is designed to decrease the Reaction counter in the database
+ * @param int $articleID ID of the article
+ * @return array the new article with the updated value
  */
 function decreaseImpression($articleID)
 {
     $query = "UPDATE articles SET reactions = reactions-1 WHERE id = " . $articleID;
     require_once "model/dbConnector.php";
     return (executeQueryUpdate($query));
+}
+
+/**
+ * This function is designed to add a category to the database
+ * @param string $name Category name
+ * @return array the new category
+ */
+function newCategory($name)
+{
+    $query = "INSERT INTO category (name) VALUES ('" . $name . "')";
+    require_once "model/dbConnector.php";
+    return executeQueryInsert($query);
+}
+
+/**
+ * this function is designed to delete a specific category from the database
+ * @param int $catID category id
+ * @return bool|null returns true if the delete was successfull
+ */
+function deleteCategory($catID)
+{
+    $query = "DELETE FROM category WHERE id=" . $catID;
+    require_once "model/dbConnector.php";
+    return executeQueryDelete($query);
 }

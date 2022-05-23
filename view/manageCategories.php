@@ -35,7 +35,7 @@ $title = "TPI - Ajouter une catégorie";
                         <?php foreach ($categories as $category) { ?>
                             <tr>
                                 <td><?= $category[1] ?></td>
-                                <td><a href="index.php?action=deleteCategory&cat=" <?= $category[0] ?>><i class="bi bi-trash"></i></a></td>
+                                <td><a href="index.php?action=deleteCategory&cat=<?= $category[0] ?>"><i class="bi bi-trash"></i></a></td>
                             </tr>
                         <?php } ?>
                     </tbody>
