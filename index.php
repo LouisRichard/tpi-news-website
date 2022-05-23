@@ -83,6 +83,7 @@ if (isset($_GET['action'])) {
             break;
         case 'createArticle':
             if ($_SESSION['admin'] == 1) {
+                require_once "controler/articles.php";
                 $authors = getAuthors();
                 require "view/createArticle.php";
             } else {
@@ -128,6 +129,26 @@ if (isset($_GET['action'])) {
             } catch (PDOException $e) {
                 $_SESSION['errorMessage'] = "Cet article ne peut être supprimé car des articles en dépendent";
                 header("Location: index.php?action=manageCategories");
+            } catch (LoginException $e) {
+                $_SESSION['errorMessage'] = $e->getMessage();
+                header('location: index.php?action=home');
+            }
+            break;
+        case "manageAuthors":
+            if ($_SESSION['admin']) {
+                require_once "controler/articles.php";
+                $authors = getAuthors();
+                require "view/manageAuthors.php";
+            } else {
+                $_SESSION['errorMessage'] = "Vous devez être administrateur pour acceder à cette page";
+                header('location: index.php?action=home');
+            }
+            break;
+        case "addAuthor":
+            try {
+                require_once "controler/articles.php";
+                addAuthor($_POST);
+                header('location: index.php?action=manageAuthors');
             } catch (LoginException $e) {
                 $_SESSION['errorMessage'] = $e->getMessage();
                 header('location: index.php?action=home');

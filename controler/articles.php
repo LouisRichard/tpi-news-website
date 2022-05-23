@@ -159,3 +159,21 @@ function delCategory($catID)
         throw new UserIsNotAdminException("Vous devez être administrateur pour utiliser cette feature");
     }
 }
+
+/**
+ * this function is designed to add a new user the the website
+ * @param array author's infos (first name, name)
+ */
+function addAuthor($authorInfos)
+{
+    $firstname = $authorInfos['authorFirstName'];
+    $name = $authorInfos['authorName'];
+
+    if($_SESSION['admin']){
+        require_once "model/articlesManager.php";
+        createAuthor($firstname, $name);
+    }
+    else {
+        throw new UserIsNotAdminException("Vous devez être administrateur pour utiliser cette feature");
+    }
+}

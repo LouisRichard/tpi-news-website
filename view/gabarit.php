@@ -61,7 +61,7 @@
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php?action=home" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1>ZenBlog</h1>
@@ -84,7 +84,8 @@
                     <li><a href="index.php?action=contact">Contact</a></li>
                     <?php if($_SESSION['admin'] == 1) { ?>
                         <li><a href="index.php?action=createArticle">Ajouter un article</a></li>
-                        <li><a href="index.php?action=manageCategories">Gérer catégories</a></li>
+                        <li><a href="index.php?action=manageCategories">Gérer les catégories</a></li>
+                        <li><a href="index.php?action=manageAuthors">Gérer les auteurs</a></li>
                     <?php } ?>
                 </ul>
             </nav><!-- .navbar -->
