@@ -154,6 +154,19 @@ if (isset($_GET['action'])) {
                 header('location: index.php?action=home');
             }
             break;
+        case "deleteAuthor":
+            try {
+                require_once "controler/articles.php";
+                delAuthor($_GET['autid']);
+                header('Location: index.php?action=manageAuthors');
+            } catch (PDOException $e) {
+                $_SESSION['errorMessage'] = "Cet article ne peut être supprimé car des articles en dépendent";
+                header("Location: index.php?action=manageAuthors");
+            } catch (LoginException $e) {
+                $_SESSION['errorMessage'] = $e->getMessage();
+                header('location: index.php?action=home');
+            }
+            break;
         default:
             header('location: index.php?action=home');
     }

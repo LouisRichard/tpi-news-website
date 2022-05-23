@@ -37,7 +37,7 @@ $title = "TPI - Gérer les auteurs";
                             <tr>
                                 <td><?= $author[1] ?></td>
                                 <td><?= $author[2] ?></td>
-                                <td><a href="index.php?action=deleteCategory&cat=<?= $author[0] ?>"><i class="bi bi-trash"></i></a></td>
+                                <td><a href="index.php?action=deleteAuthor&autid=<?= $author[0] ?>"><i class="bi bi-trash"></i></a></td>
                             </tr>
                         <?php } ?>
                     </tbody>

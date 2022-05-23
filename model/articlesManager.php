@@ -138,3 +138,15 @@ function createAuthor($firstname, $name)
     require_once "model/dbConnector.php";
     return executeQueryInsert($query);
 }
+
+/**
+ * This function is designed to delete a specific author from the database
+ * @param int $authorID author's id
+ */
+function deleteAuthor($authorID)
+{
+    //die(var_dump($authorID));
+    $query = "DELETE FROM authors WHERE id = " . $authorID;
+    require_once "model/dbConnector.php";
+    return executeQueryDelete($query);
+}
