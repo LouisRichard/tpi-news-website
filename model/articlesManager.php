@@ -52,8 +52,8 @@ function addArticleInDB($abstract, $article, $category, $filePath, $author)
 }
 
 /**
- * This function is designed to get the 20 latest articles for the home page
- * @return array arr[][] 20 articles 
+ * This function is designed to get the 6 latest articles for the home page
+ * @return array arr[][] 6 articles 
  */
 function fetchHomeArticles()
 {
@@ -66,7 +66,7 @@ function fetchHomeArticles()
 /**
  * This function is designed to return the informations about one article
  * @param int $articleID ID of the article
- * @return array arr[]
+ * @return array arr[abstract, article, image, date, authors.name authors.firstname, category.name reactions]
  */
 function fetchOneArticle($articleID)
 {
@@ -145,7 +145,6 @@ function createAuthor($firstname, $name)
  */
 function deleteAuthor($authorID)
 {
-    //die(var_dump($authorID));
     $query = "DELETE FROM authors WHERE id = " . $authorID;
     require_once "model/dbConnector.php";
     return executeQueryDelete($query);

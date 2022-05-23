@@ -4,7 +4,7 @@
  * This file is designed to manage everything regarding emails (verifications, etc)
  * Authors  : Louis Richard, Michael Pedroletti
  * Project  : tpi-news-website
- * Created  : 26.DEC.2021
+ * Created  : DEC. 26 2021
  *
  * Source       :   https://github.com/tpi-news-website
  */

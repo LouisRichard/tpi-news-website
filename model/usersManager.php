@@ -16,7 +16,7 @@
  * @param mixed $username
  * @param mixed $email
  * @param mixed $password : password in clear - Not encrypted yet
- * @return bool|null
+ * @return bool|null returns true if the register was successfull
  */
 function registerNewUser($username, $email, $password)
 {
