@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Contains the page to add or delete categories
+ * Contains the page to add or delete authors
  * Author   : louis.richard@tutanota.com
  * Project  : tpi-news-website
  * Created  : MAY. 23 2022
@@ -11,14 +11,14 @@
  */
 
 ob_start();
-$title = "TPI - Gérer les catégories";
+$title = "TPI - Gérer les auteurs";
 ?>
 
 <section>
     <div class="container" data-aos="fade-up">
         <div class="row">
             <div class="col-lg-12 text-center mb-5">
-                <h1 class="page-title">Catégories</h1>
+                <h1 class="page-title">Auteurs</h1>
             </div>
         </div>
 
@@ -27,29 +27,35 @@ $title = "TPI - Gérer les catégories";
                 <table class='table'>
                     <thead>
                         <tr>
-                            <th scope="col">Catégorie</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prénom</th>
                             <th scope="col">Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($categories as $category) { ?>
+                        <?php foreach ($authors as $author) { ?>
                             <tr>
-                                <td><?= $category[1] ?></td>
-                                <td><a href="index.php?action=deleteCategory&cat=<?= $category[0] ?>"><i class="bi bi-trash"></i></a></td>
+                                <td><?= $author[1] ?></td>
+                                <td><?= $author[2] ?></td>
+                                <td><a href="index.php?action=deleteAuthor&autid=<?= $author[0] ?>"><i class="bi bi-trash"></i></a></td>
                             </tr>
                         <?php } ?>
                     </tbody>
                 </table>
             </div>
             <div class="col-md-4">
-                <h4>Nouvelle catégorie :</h4>
-                <form class='form' method="POST" action="index.php?action=addCategory">
+                <h4>Nouvel Auteur :</h4>
+                <form class='form' method="POST" action="index.php?action=addAuthor">
                     <div class="form-group">
-                        <label for="categoryName">Nom</label>
-                        <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Nom de la catégorie">
+                        <label for="authorName">Nom</label>
+                        <input type="text" class="form-control" id="authorName" name="authorName" placeholder="Nom de l'auteur">
+                    </div>
+                    <div class="form-group">
+                        <label for="authorFirstName">Prénom</label>
+                        <input type="text" class="form-control" id="authorFirstName" name="authorFirstName" placeholder="Prénom de l'auteur">
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-dark">Créer la catégorie</button>
+                    <button type="submit" class="btn btn-dark">Créer l'auteur</button>
                 </form>
             </div>
         </div>

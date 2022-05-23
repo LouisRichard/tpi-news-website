@@ -125,3 +125,28 @@ function deleteCategory($catID)
     require_once "model/dbConnector.php";
     return executeQueryDelete($query);
 }
+
+/**
+ * this function is designed to add a new author to the database
+ * @param string $firstname author's first name
+ * @param string $name author's last name 
+ * @return array new author's infos
+ */
+function createAuthor($firstname, $name)
+{
+    $query = "INSERT INTO authors (name, firstname) VALUES ('" . $name . "', '" . $firstname . "')";
+    require_once "model/dbConnector.php";
+    return executeQueryInsert($query);
+}
+
+/**
+ * This function is designed to delete a specific author from the database
+ * @param int $authorID author's id
+ */
+function deleteAuthor($authorID)
+{
+    //die(var_dump($authorID));
+    $query = "DELETE FROM authors WHERE id = " . $authorID;
+    require_once "model/dbConnector.php";
+    return executeQueryDelete($query);
+}
