@@ -111,14 +111,27 @@ if (isset($_GET['action'])) {
             }
             break;
         case "addCategory":
-            require_once "controler/articles.php";
-            addCategory($_POST['categoryName']);
-            header('Location: index.php?action=manageCategories');
+            try {
+                require_once "controler/articles.php";
+                addCategory($_POST['categoryName']);
+                header('Location: index.php?action=manageCategories');
+            } catch (LoginException $e) {
+                $_SESSION['errorMessage'] = $e->getMessage();
+                header("Location: index.php?action=home");
+            }
             break;
         case "deleteCategory":
-            require_once "controler/articles.php";
-            delCategory($_GET['cat']);
-            header("Location: index.php?action=manageCategories");
+            try {
+                require_once "controler/articles.php";
+                delCategory($_GET['cat']);
+                header("Location: index.php?action=manageCategories");
+            } catch (PDOException $e) {
+                $_SESSION['errorMessage'] = "Cet article ne peut être supprimé car des articles en dépendent";
+                header("Location: index.php?action=manageCategories");
+            } catch (LoginException $e) {
+                $_SESSION['errorMessage'] = $e->getMessage();
+                header('location: index.php?action=home');
+            }
             break;
         default:
             header('location: index.php?action=home');
