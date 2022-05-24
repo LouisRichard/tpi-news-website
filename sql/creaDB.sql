@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `news`.`Comments` (
   `content` TEXT NOT NULL,
   `Users_id` INT NOT NULL,
   `Articles_id` INT NOT NULL,
-  `Comments_id` INT NOT NULL,
+  `Comments_id` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Comments_Users_idx` (`Users_id` ASC) VISIBLE,
   INDEX `fk_Comments_Articles1_idx` (`Articles_id` ASC) VISIBLE,
