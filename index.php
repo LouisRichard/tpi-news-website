@@ -70,6 +70,7 @@ if (isset($_GET['action'])) {
             require_once "controler/users.php";
             try {
                 login($_POST);
+                header('Location: index.php?action=home');
             } catch (LoginException $e) {
                 $_SESSION['errorMessage'] = $e->getMessage();
                 header('location: index.php?action=home');
@@ -81,6 +82,7 @@ if (isset($_GET['action'])) {
         case 'logout':
             require_once "controler/users.php";
             logout();
+            header('location: index.php?action=home');
             break;
         case 'createArticle':
             if ($_SESSION['admin'] == 1) {
@@ -174,7 +176,7 @@ if (isset($_GET['action'])) {
                 postComment($_POST['comment-message'], $_GET['aid'], $_SESSION['id']);
             } catch (LoginException $e) {
                 $_SESSION['errorMessage'] = $e->getMessage();
-                header('location: index.php?action=home');
+                header('location: index.php?action=showArticle&aid=' . $_GET['aid']);
             }
             break;
         default:
