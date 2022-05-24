@@ -117,7 +117,7 @@ CREATE TABLE `comments` (
   `content` text NOT NULL,
   `Users_id` int NOT NULL,
   `Articles_id` int NOT NULL,
-  `Comments_id` int NOT NULL,
+  `Comments_id` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Comments_Users_idx` (`Users_id`),
   KEY `fk_Comments_Articles1_idx` (`Articles_id`),

@@ -34,11 +34,11 @@ function getAuthors()
 /**
  * This function is designed to add an article to the site
  * @param array $request
- * @throws CouldNotSaveFileException
- * @throws InvalidFileExtensionException
- * @throws FileTooHeavyException
- * @throws EmptyArticleFormException
- * @throws UserIsNotAdminException
+ * @throws CouldNotSaveFileException::ArticleException
+ * @throws InvalidFileExtensionException::ArticleException
+ * @throws FileTooHeavyException::ArticleException
+ * @throws EmptyArticleFormException::ArticleException
+ * @throws UserIsNotAdminException::LoginException
  */
 function addArticle($request)
 {
@@ -47,7 +47,9 @@ function addArticle($request)
         $imageFile = $imageDir . basename($_FILES['articleImage']['name']) . date('ymdhis');
 
         $abstract = str_replace("'", "\'", $request['abstract']);
+        $abstract = str_replace('"', '\"', $request['abstract']);
         $article = str_replace("'", "\'", $request['article']);
+        $article = str_replace('"', '\"', $request['article']);
         $article = str_replace("\n", "<br/>", $article);
         $categoryID = $request['category'];
         $author = $request['author'];
@@ -100,6 +102,7 @@ function getHomeArticles()
 
 /**
  * This function is designed to return a single article
+ * @param int $articleID
  * @return array arr[] articles data
  */
 function getOneArticle($articleID)
@@ -111,7 +114,7 @@ function getOneArticle($articleID)
 /**
  * This function is designed to increase the reaction on an article
  * @param int $articleID article's id
- * @throws UserIsNotLoggedInException
+ * @throws UserIsNotLoggedInException::LoginException
  */
 function likeArticle($articleID)
 {
@@ -127,7 +130,7 @@ function likeArticle($articleID)
 /**
  * This function is designed to decrease the reaction on an article
  * @param int $articleID article's id
- * @throws UserIsNotLoggedInException
+ * @throws UserIsNotLoggedInException::LoginException
  */
 function dislikeArticle($articleID)
 {
@@ -143,7 +146,7 @@ function dislikeArticle($articleID)
 /**
  * this function designed to add a category to the website
  * @param string $name Category name
- * @throws UserIsNotAdminException
+ * @throws UserIsNotAdminException::LoginException
  */
 function addCategory($name)
 {
@@ -159,7 +162,7 @@ function addCategory($name)
 /**
  * This function is designed to delete a category from the website in case you created it by accident or if no articles have been written for it
  * @param int $catID category's id
- * @throws UserIsNotAdminException
+ * @throws UserIsNotAdminException::LoginException
  */
 function delCategory($catID)
 {
@@ -175,18 +178,17 @@ function delCategory($catID)
 /**
  * this function is designed to add a new user the the website
  * @param array author's infos (first name, name)
- * @throws UserIsNotAdminException
+ * @throws UserIsNotAdminException::LoginException
  */
 function addAuthor($authorInfos)
 {
     $firstname = $authorInfos['authorFirstName'];
     $name = $authorInfos['authorName'];
 
-    if($_SESSION['admin']){
+    if ($_SESSION['admin']) {
         require_once "model/articlesManager.php";
         createAuthor($firstname, $name);
-    }
-    else {
+    } else {
         throw new UserIsNotAdminException("Vous devez être administrateur pour utiliser cette feature");
     }
 }
@@ -194,9 +196,10 @@ function addAuthor($authorInfos)
 /**
  * This function is designed to remove an author from the website
  * @param int $authorID author's id
- * @throws UserIsNotAdminException
+ * @throws UserIsNotAdminException::LoginException
  */
-function delAuthor($authorID){
+function delAuthor($authorID)
+{
     if ($_SESSION['admin']) {
         require_once "model/articlesManager.php";
         deleteAuthor($authorID);
@@ -206,9 +209,33 @@ function delAuthor($authorID){
     }
 }
 
-
+/**
+ * This function is designed to post a comment to the website
+ * @param string $content - comment content
+ * @param int $article article's ID
+ * @param int $user user's ID
+ * @throws UserIsNotLoggedInException::LoginException
+ */
 function postComment($content, $article, $user)
 {
+    if ($_SESSION['name']) {
+        $content = str_replace("'", "\'", $content);
+        $content = str_replace('"', '\"', $content);
+        $content = str_replace("\n", "<br/>", $content);
+        require_once "model/articlesManager.php";
+        addComment($content, $article, $user);
+    } else {
+        require_once "model/exceptions/LoginException.php";
+        throw new UserIsNotLoggedInException("Vous devez vous connecter pour poster des commentaires");
+    }
+}
+
+/**
+ * This function is designed to return all comments under a single article
+ * @param int $articleID
+ */
+function getComments($articleID)
+{
     require_once "model/articlesManager.php";
-    addComment($content, $article, $user);
+    return getArticleComments($articleID);
 }

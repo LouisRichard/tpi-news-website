@@ -25,6 +25,7 @@ if (isset($_GET['action'])) {
         case 'showArticle':
             require_once "controler/articles.php";
             $article = getOneArticle($_GET['aid']);
+            $comments = getComments($_GET['aid']);
             require "view/article.php";
             break;
         case 'like':
@@ -69,6 +70,7 @@ if (isset($_GET['action'])) {
             require_once "controler/users.php";
             try {
                 login($_POST);
+                header('Location: index.php?action=home');
             } catch (LoginException $e) {
                 $_SESSION['errorMessage'] = $e->getMessage();
                 header('location: index.php?action=home');
@@ -80,6 +82,7 @@ if (isset($_GET['action'])) {
         case 'logout':
             require_once "controler/users.php";
             logout();
+            header('location: index.php?action=home');
             break;
         case 'createArticle':
             if ($_SESSION['admin'] == 1) {
@@ -168,12 +171,12 @@ if (isset($_GET['action'])) {
             }
             break;
         case "postComment":
-            try{
-            require_once "controler/articles.php";
-            postComment($_POST['comment-message'], $_GET['aid'], $_SESSION['id']);
-            } catch (PDOException $e){
-                $_SESSION['errorMessage'] = "this function doesn't work properly";
-                header('location: index.php?action=home');
+            try {
+                require_once "controler/articles.php";
+                postComment($_POST['comment-message'], $_GET['aid'], $_SESSION['id']);
+            } catch (LoginException $e) {
+                $_SESSION['errorMessage'] = $e->getMessage();
+                header('location: index.php?action=showArticle&aid=' . $_GET['aid']);
             }
             break;
         default:
