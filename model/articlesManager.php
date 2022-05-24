@@ -149,3 +149,10 @@ function deleteAuthor($authorID)
     require_once "model/dbConnector.php";
     return executeQueryDelete($query);
 }
+
+function addComment($content, $article, $user)
+{
+    $query = "INSERT INTO comments (content, Users_id, Articles_id) VALUES ('" . $content . "', " . $article . ", " . $user . ")";
+    require_once "model/dbConnector.php";
+    return executeQueryInsert($query);
+}

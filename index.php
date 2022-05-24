@@ -167,6 +167,15 @@ if (isset($_GET['action'])) {
                 header('location: index.php?action=home');
             }
             break;
+        case "postComment":
+            try{
+            require_once "controler/articles.php";
+            postComment($_POST['comment-message'], $_GET['aid'], $_SESSION['id']);
+            } catch (PDOException $e){
+                $_SESSION['errorMessage'] = "this function doesn't work properly";
+                header('location: index.php?action=home');
+            }
+            break;
         default:
             header('location: index.php?action=home');
     }

@@ -205,3 +205,10 @@ function delAuthor($authorID){
         throw new UserIsNotAdminException("Vous devez être administrateur pour utiliser cette feature");
     }
 }
+
+
+function postComment($content, $article, $user)
+{
+    require_once "model/articlesManager.php";
+    addComment($content, $article, $user);
+}

@@ -127,6 +127,7 @@ function login($loginDetails)
  */
 function createSession($infos)
 {
+    $_SESSION['id'] = $infos['id'];
     $_SESSION['name'] = $infos['name'];
     $_SESSION['admin'] = $infos['admin'];
 }

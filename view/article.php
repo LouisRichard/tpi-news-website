@@ -30,8 +30,26 @@ $title = "TPI - Article";
                     <p><?= $article[1] ?></p>
                     <br /><br />
                     <div class="post-meta"><span><?= $article[5] . " " . $article[4] ?></span></div>
-                    <a href="index.php?action=like&aid=<?=$_GET['aid']?>"><i class="bi bi-hand-thumbs-up"></i></a> / <a href="index.php?action=dislike&aid=<?=$_GET['aid']?>"><i class="bi bi-hand-thumbs-down"></i></a> - Score : <?=$article[7]?>
+                    <a href="index.php?action=like&aid=<?= $_GET['aid'] ?>"><i class="bi bi-hand-thumbs-up"></i></a> / <a href="index.php?action=dislike&aid=<?= $_GET['aid'] ?>"><i class="bi bi-hand-thumbs-down"></i></a> - Score : <?= $article[7] ?>
                 </div><!-- End Single Post Content -->
+
+                <!-- ======= Comments Form ======= -->
+                <div class="row justify-content-center mt-5">
+                    <div class="col-lg-12">
+                        <form action="index.php?action=postComment&aid=<?= $_GET['aid'] ?>" method="POST">
+                            <h5 class="comment-title">Laisser un commentaire</h5>
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    <label for="comment-message">Commentaire</label>
+                                    <textarea class="form-control" name="comment-message" id="comment-message" placeholder="Commentaire" cols="30" rows="3"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <input type="submit" class="btn btn-primary" value="Post comment">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- End Comments Form -->
 
                 <!-- ======= Comments ======= -->
                 <div class="comments">
@@ -106,33 +124,6 @@ $title = "TPI - Article";
                         </div>
                     </div>
                 </div><!-- End Comments -->
-
-                <!-- ======= Comments Form ======= -->
-                <div class="row justify-content-center mt-5">
-
-                    <div class="col-lg-12">
-                        <h5 class="comment-title">Leave a Comment</h5>
-                        <div class="row">
-                            <div class="col-lg-6 mb-3">
-                                <label for="comment-name">Name</label>
-                                <input type="text" class="form-control" id="comment-name" placeholder="Enter your name">
-                            </div>
-                            <div class="col-lg-6 mb-3">
-                                <label for="comment-email">Email</label>
-                                <input type="text" class="form-control" id="comment-email" placeholder="Enter your email">
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label for="comment-message">Message</label>
-
-                                <textarea class="form-control" id="comment-message" placeholder="Enter your name" cols="30" rows="10"></textarea>
-                            </div>
-                            <div class="col-12">
-                                <input type="submit" class="btn btn-primary" value="Post comment">
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End Comments Form -->
-
             </div>
         </div>
     </div>
