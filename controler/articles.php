@@ -239,3 +239,14 @@ function getComments($articleID)
     require_once "model/articlesManager.php";
     return getArticleComments($articleID);
 }
+
+/**
+ * This function is designed to return the 20 latest articles in a specific category
+ * @param int $catID category's id
+ * @return array articles' infos
+ */
+function getArticleCategory($catID)
+{
+    require_once "model/articlesManager.php";
+    return getArticles($catID);
+}
