@@ -117,7 +117,6 @@ function login($loginDetails)
         require_once "model/exceptions/LoginException.php";
         throw new EmptyLoginFormException("Formulaire de connexion incomplet");
     }
-    header('Location: index.php?action=home');
 }
 
 
@@ -127,6 +126,7 @@ function login($loginDetails)
  */
 function createSession($infos)
 {
+    $_SESSION['id'] = $infos['id'];
     $_SESSION['name'] = $infos['name'];
     $_SESSION['admin'] = $infos['admin'];
 }
@@ -139,5 +139,4 @@ function logout()
 {
     $_SESSION = array();
     session_destroy();
-    require "view/home.php";
 }

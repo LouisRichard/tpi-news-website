@@ -125,7 +125,7 @@ function checkActivated($email)
 function getUserInfos($email)
 {
     $strSeparator = '\'';
-    $infosQuery = 'SELECT name, admin FROM Users WHERE email = ' . $strSeparator . strtolower($email) . $strSeparator;
+    $infosQuery = 'SELECT id, name, admin FROM Users WHERE email = ' . $strSeparator . strtolower($email) . $strSeparator;
 
     require_once 'model/dbConnector.php';
     $queryResult = executeQuerySelect($infosQuery);
@@ -134,7 +134,7 @@ function getUserInfos($email)
         throw new LoginException();
     } else {
         if (count($queryResult) == 1) {
-            $result = array('name' => $queryResult[0][0], 'admin' => $queryResult[0][1]);
+            $result = array('id' => $queryResult [0][0], 'name' => $queryResult[0][1], 'admin' => $queryResult[0][2]);
         }
         return $result;
     }

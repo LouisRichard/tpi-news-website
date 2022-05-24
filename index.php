@@ -25,6 +25,7 @@ if (isset($_GET['action'])) {
         case 'showArticle':
             require_once "controler/articles.php";
             $article = getOneArticle($_GET['aid']);
+            $comments = getComments($_GET['aid']);
             require "view/article.php";
             break;
         case 'like':
@@ -36,15 +37,6 @@ if (isset($_GET['action'])) {
             require_once "controler/articles.php";
             dislikeArticle($_GET['aid']);
             header('location: index.php?action=showArticle&aid=' . $_GET['aid']);
-            break;
-        case 'categories':
-            require "view/category.php";
-            break;
-        case 'search':
-            require "view/search-result.php";
-            break;
-        case 'about':
-            require "view/about.php";
             break;
         case 'contact':
             require "view/contact.php";
@@ -69,6 +61,7 @@ if (isset($_GET['action'])) {
             require_once "controler/users.php";
             try {
                 login($_POST);
+                header('Location: index.php?action=home');
             } catch (LoginException $e) {
                 $_SESSION['errorMessage'] = $e->getMessage();
                 header('location: index.php?action=home');
@@ -80,6 +73,7 @@ if (isset($_GET['action'])) {
         case 'logout':
             require_once "controler/users.php";
             logout();
+            header('location: index.php?action=home');
             break;
         case 'createArticle':
             if ($_SESSION['admin'] == 1) {
@@ -167,6 +161,20 @@ if (isset($_GET['action'])) {
                 header('location: index.php?action=home');
             }
             break;
+        case "postComment":
+            try {
+                require_once "controler/articles.php";
+                postComment($_POST['comment-message'], $_GET['aid'], $_SESSION['id']);
+                header('location: index.php?action=showArticle&aid=' . $_GET['aid']);
+            } catch (LoginException $e) {
+                $_SESSION['errorMessage'] = $e->getMessage();
+                header('location: index.php?action=showArticle&aid=' . $_GET['aid']);
+            }
+            break;
+        case "showCategory":
+            require_once "controler/articles.php";
+            $category = getArticleCategory($_GET['cat']);
+            require "view/category.php";
         default:
             header('location: index.php?action=home');
     }

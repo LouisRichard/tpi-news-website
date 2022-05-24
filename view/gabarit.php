@@ -69,23 +69,24 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a href="index.php">Acceuil</a></li>
-                    <li><a href="index.php?action=article">Article</a></li>
-                    <li class="dropdown"><a href="index.php?action=categories"><span>Categories</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                    <li><a href="index.php">Accueil</a></li>
+                    <li class="dropdown"><a href="#"><span>Categories</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
-                            <li><a href="index.php?action=search">Search Result</a></li>
                             <?php foreach ($categories as $category) { ?>
-                                <li><a href="index.php?action=showCategory&cat=<?=$category[0]?>"><?=$category[1]?></a></li>
+                                <li><a href="index.php?action=showCategory&cat=<?= $category[0] ?>"><?= $category[1] ?></a></li>
                             <?php } ?>
                         </ul>
                     </li>
 
-                    <li><a href="index.php?action=about">About</a></li>
                     <li><a href="index.php?action=contact">Contact</a></li>
-                    <?php if($_SESSION['admin'] == 1) { ?>
-                        <li><a href="index.php?action=createArticle">Ajouter un article</a></li>
-                        <li><a href="index.php?action=manageCategories">Gérer les catégories</a></li>
-                        <li><a href="index.php?action=manageAuthors">Gérer les auteurs</a></li>
+                    <?php if ($_SESSION['admin']) { ?>
+                        <li class="dropdown"><a href="#"><span>Administration</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                            <ul>
+                                <li><a href="index.php?action=createArticle">Ajouter un article</a></li>
+                                <li><a href="index.php?action=manageCategories">Gérer les catégories</a></li>
+                                <li><a href="index.php?action=manageAuthors">Gérer les auteurs</a></li>
+                            </ul>
+                        </li>
                     <?php } ?>
                 </ul>
             </nav><!-- .navbar -->
@@ -216,93 +217,6 @@
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
-
-        <div class="footer-content">
-            <div class="container">
-
-                <div class="row g-5">
-                    <div class="col-lg-4">
-                        <h3 class="footer-heading">About ZenBlog</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ab, perspiciatis beatae autem deleniti voluptate nulla a dolores, exercitationem eveniet libero laudantium recusandae officiis qui aliquid blanditiis omnis quae. Explicabo?</p>
-                        <p><a href="about.html" class="footer-link-more">Learn More</a></p>
-                    </div>
-                    <div class="col-6 col-lg-2">
-                        <h3 class="footer-heading">Navigation</h3>
-                        <ul class="footer-links list-unstyled">
-                            <li><a href="index.html"><i class="bi bi-chevron-right"></i> Home</a></li>
-                            <li><a href="index.html"><i class="bi bi-chevron-right"></i> Blog</a></li>
-                            <li><a href="category.html"><i class="bi bi-chevron-right"></i> Categories</a></li>
-                            <li><a href="single-post.html"><i class="bi bi-chevron-right"></i> Single Post</a></li>
-                            <li><a href="about.html"><i class="bi bi-chevron-right"></i> About us</a></li>
-                            <li><a href="contact.html"><i class="bi bi-chevron-right"></i> Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-lg-2">
-                        <h3 class="footer-heading">Categories</h3>
-                        <ul class="footer-links list-unstyled">
-                            <li><a href="category.html"><i class="bi bi-chevron-right"></i> Business</a></li>
-                            <li><a href="category.html"><i class="bi bi-chevron-right"></i> Culture</a></li>
-                            <li><a href="category.html"><i class="bi bi-chevron-right"></i> Sport</a></li>
-                            <li><a href="category.html"><i class="bi bi-chevron-right"></i> Food</a></li>
-                            <li><a href="category.html"><i class="bi bi-chevron-right"></i> Politics</a></li>
-                            <li><a href="category.html"><i class="bi bi-chevron-right"></i> Celebrity</a></li>
-                            <li><a href="category.html"><i class="bi bi-chevron-right"></i> Startups</a></li>
-                            <li><a href="category.html"><i class="bi bi-chevron-right"></i> Travel</a></li>
-
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <h3 class="footer-heading">Recent Posts</h3>
-
-                        <ul class="footer-links footer-blog-entry list-unstyled">
-                            <li>
-                                <a href="single-post.html" class="d-flex align-items-center">
-                                    <img src="assets/img/post-sq-1.jpg" alt="" class="img-fluid me-3">
-                                    <div>
-                                        <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                                        <span>5 Great Startup Tips for Female Founders</span>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="single-post.html" class="d-flex align-items-center">
-                                    <img src="assets/img/post-sq-2.jpg" alt="" class="img-fluid me-3">
-                                    <div>
-                                        <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                                        <span>What is the son of Football Coach John Gruden, Deuce Gruden doing Now?</span>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="single-post.html" class="d-flex align-items-center">
-                                    <img src="assets/img/post-sq-3.jpg" alt="" class="img-fluid me-3">
-                                    <div>
-                                        <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                                        <span>Life Insurance And Pregnancy: A Working Mom’s Guide</span>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="single-post.html" class="d-flex align-items-center">
-                                    <img src="assets/img/post-sq-4.jpg" alt="" class="img-fluid me-3">
-                                    <div>
-                                        <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                                        <span>How to Avoid Distraction and Stay Focused During Video Calls?</span>
-                                    </div>
-                                </a>
-                            </li>
-
-                        </ul>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="footer-legal">
             <div class="container">
 
