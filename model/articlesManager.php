@@ -177,3 +177,23 @@ function getArticleComments($articleID)
     require_once "model/dbConnector.php";
     return executeQuerySelect($query);
 }
+
+/**
+ * This function is designed to return the 20 latest articles in a category or not
+ * @param int $catID = null category's id
+ * @return array 20 articles 
+ */
+function getArticles($catID = null)
+{
+    if ($catID != null) {
+        $query = "SELECT abstract, article, image, date, authors.firstname, authors.name
+            FROM articles INNER JOIN authors ON authors.id = articles.Authors_id
+            WHERE Category_id = " . $catID . " ORDER BY date DESC LIMIT 20";
+    } else {
+        $query = "SELECT abstract, article, image, date, authors.firstname, authors.name
+            FROM articles INNER JOIN authors ON authors.id = articles.Authors_id
+            ORDER BY date DESC LIMIT 20";
+    }
+    require_once "model/dbConnector.php";
+    return executeQuerySelect($query);
+}

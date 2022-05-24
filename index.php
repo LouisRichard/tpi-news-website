@@ -180,6 +180,10 @@ if (isset($_GET['action'])) {
                 header('location: index.php?action=showArticle&aid=' . $_GET['aid']);
             }
             break;
+        case "showCategory":
+            require_once "controler/articles.php";
+            $category = getArticleCategory($_GET['cat']);
+            require "view/category.php";
         default:
             header('location: index.php?action=home');
     }
