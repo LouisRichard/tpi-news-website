@@ -174,6 +174,7 @@ if (isset($_GET['action'])) {
             try {
                 require_once "controler/articles.php";
                 postComment($_POST['comment-message'], $_GET['aid'], $_SESSION['id']);
+                header('location: index.php?action=showArticle&aid=' . $_GET['aid']);
             } catch (LoginException $e) {
                 $_SESSION['errorMessage'] = $e->getMessage();
                 header('location: index.php?action=showArticle&aid=' . $_GET['aid']);
