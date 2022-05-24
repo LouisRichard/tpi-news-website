@@ -38,15 +38,6 @@ if (isset($_GET['action'])) {
             dislikeArticle($_GET['aid']);
             header('location: index.php?action=showArticle&aid=' . $_GET['aid']);
             break;
-        case 'categories':
-            require "view/category.php";
-            break;
-        case 'search':
-            require "view/search-result.php";
-            break;
-        case 'about':
-            require "view/about.php";
-            break;
         case 'contact':
             require "view/contact.php";
             break;
