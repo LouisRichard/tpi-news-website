@@ -79,6 +79,37 @@ function fetchOneArticle($articleID)
 }
 
 /**
+ * This fucntion is designed to return 9 articles for the grid portion of the home page
+ * @return array arr[id, abstract, date, image, category]
+ */
+function fetchGridArticles()
+{
+    $query = "SELECT articles.id, abstract, articles.date, image, category.name as category
+              FROM articles INNER JOIN category
+              ON articles.Category_id = category.id
+              WHERE articles.date >= DATE(NOW() - INTERVAL 7 DAY)
+              ORDER BY date DESC, category
+              LIMIT 9";
+    require_once "model/dbConnector.php";
+    return executeQuerySelect($query);
+}
+
+
+/**
+ * This function is designed to return a random article from the database
+ * @return array arr[id, abstract, image, category]
+ */
+function fetchRandomArticle()
+{
+    $query = "SELECT articles.id, abstract, image, category.name as category
+              FROM articles INNER JOIN category ON articles.Category_id = category.id
+              ORDER BY RAND()
+              LIMIT 1";
+    require_once "model/dbConnector.php";
+    return executeQuerySelect($query);
+}
+
+/**
  * This function is designed to increase de Reaction counter in the database
  * @param int $articleID ID of the article
  * @return array the article with the updated value

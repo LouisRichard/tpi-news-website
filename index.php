@@ -11,15 +11,19 @@
  */
 
 session_start();
-require_once("controler/articles.php");
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
+    require_once("controler/articles.php");
     $categories = getCategories();
 
     switch ($action) {
         case 'home':
             require_once "controler/articles.php";
             $homeArticles = getHomeArticles();
+            require_once "controler/articles.php";
+            $postGrid = getGridArticles();
+            require_once "controler/articles.php";
+            $random = getRandomArticle();
             require "view/home.php";
             break;
         case 'showArticle':

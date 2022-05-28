@@ -112,6 +112,26 @@ function getOneArticle($articleID)
 }
 
 /**
+ * This function is designed to return 3x3 articles from the database
+ * @return array arr[3][3]
+ */
+function getGridArticles()
+{
+    require_once "model/articlesManager.php";
+    return array_chunk(fetchGridArticles(), 3, true);
+}
+
+/**
+ * This function is designed to return a random article
+ * @return array arr[]
+ */
+function getRandomArticle()
+{
+    require_once "model/articlesManager.php";
+    return fetchRandomArticle()[0];
+}
+
+/**
  * This function is designed to increase the reaction on an article
  * @param int $articleID article's id
  * @throws UserIsNotLoggedInException::LoginException
