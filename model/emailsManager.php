@@ -53,10 +53,15 @@ function verifyEmail($username, $email, $code)
  */
 function sendEmail($email, $username, $subject, $message)
 {
-    // Gets SMTP user password from .psw file 
-    $pswFileName = ".psw";
-    $pswFile = fopen("$pswFileName", "r");
-    $psw = fread($pswFile, fileSize($pswFileName));
+	
+	$username = 'valid.email.for@your.domain';
+	$psw = 'YourPasswordHere';
+	
+    // Gets SMTP user password from .psw file
+	// Used only during developpement
+    // $pswFileName = ".psw";
+    // $pswFile = fopen("$pswFileName", "r");
+    // $psw = fread($pswFile, fileSize($pswFileName));
 
     $mail = new PHPMailer(true);
     //Server settings
@@ -74,7 +79,7 @@ function sendEmail($email, $username, $subject, $message)
         )
     );
     //authentication to the SMTP server
-    $mail->Username = 'confirm@wewfamily.ch';
+    $mail->Username = $username;
     $mail->Password = $psw;
 
     //Recipients
