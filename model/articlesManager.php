@@ -15,7 +15,7 @@
  */
 function pullCategories()
 {
-    $categoriesQuery = "SELECT * FROM Category";
+    $categoriesQuery = "SELECT * FROM category";
 
     require_once "model/dbConnector.php";
     return executeQuerySelect($categoriesQuery);
@@ -57,7 +57,7 @@ function addArticleInDB($abstract, $article, $category, $filePath, $author)
  */
 function fetchHomeArticles()
 {
-    $articleQuery = "SELECT id, abstract, image FROM Articles ORDER BY date DESC LIMIT 6";
+    $articleQuery = "SELECT id, abstract, image FROM articles ORDER BY date DESC LIMIT 6";
 
     require_once "model/dbConnector.php";
     return executeQuerySelect($articleQuery);
