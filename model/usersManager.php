@@ -27,7 +27,7 @@ function registerNewUser($username, $email, $password)
     $userHashPsw = password_hash($password, PASSWORD_DEFAULT);
     $activationCode = md5($email);
 
-    $registerQuery = 'INSERT INTO Users (name, email, password, activationCode) VALUES (' . $str . $username . $str . ',' . $str . $email . $str . ',' . $str . $userHashPsw . $str . ',' . $str . $activationCode . $str . ')';
+    $registerQuery = 'INSERT INTO users (name, email, password, activationCode) VALUES (' . $str . $username . $str . ',' . $str . $email . $str . ',' . $str . $userHashPsw . $str . ',' . $str . $activationCode . $str . ')';
 
     require_once 'model/dbConnector.php';
     $queryResult = executeQueryInsert($registerQuery);
@@ -51,7 +51,7 @@ function registerNewUser($username, $email, $password)
  */
 function activateUser($code)
 {
-    $verificationQuery = 'UPDATE Users SET enabled = 1 WHERE activationCode = "' . $code . '"';
+    $verificationQuery = 'UPDATE users SET enabled = 1 WHERE activationCode = "' . $code . '"';
     require_once 'model/dbConnector.php';
     $result = executeQueryUpdate($verificationQuery);
     return $result;
@@ -72,7 +72,7 @@ function checkLogin($login, $userPsw)
     $result = false;
 
     $strSeparator = '\'';
-    $loginQuery = 'SELECT password FROM Users WHERE email = ' . $strSeparator . $login . $strSeparator;
+    $loginQuery = 'SELECT password FROM users WHERE email = ' . $strSeparator . $login . $strSeparator;
 
     require_once 'model/dbConnector.php';
     $queryResult = executeQuerySelect($loginQuery);
@@ -100,7 +100,7 @@ function checkActivated($email)
     $result = false;
 
     $strSeparator = '\'';
-    $activatedQuery = 'SELECT enabled FROM Users WHERE email = ' . $strSeparator . strtolower($email) . $strSeparator;
+    $activatedQuery = 'SELECT enabled FROM users WHERE email = ' . $strSeparator . strtolower($email) . $strSeparator;
 
     require_once 'model/dbConnector.php';
     $queryResult = executeQuerySelect($activatedQuery);
@@ -125,7 +125,7 @@ function checkActivated($email)
 function getUserInfos($email)
 {
     $strSeparator = '\'';
-    $infosQuery = 'SELECT id, name, admin FROM Users WHERE email = ' . $strSeparator . strtolower($email) . $strSeparator;
+    $infosQuery = 'SELECT id, name, admin FROM users WHERE email = ' . $strSeparator . strtolower($email) . $strSeparator;
 
     require_once 'model/dbConnector.php';
     $queryResult = executeQuerySelect($infosQuery);

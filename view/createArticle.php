@@ -58,7 +58,6 @@ $title = "TPI - Ajouter un article";
                     </div>
                 </div>
                 <br />
-                <input type="submit" value="submit" value="submit">
                 <div class="text-center"><button class="btn btn-outline-dark" type="submit">Créer l'article</button></div>
             </form>
         </div>
