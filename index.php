@@ -179,6 +179,7 @@ if (isset($_GET['action'])) {
             require_once "controler/articles.php";
             $category = getArticleCategory($_GET['cat']);
             require "view/category.php";
+            break;
         default:
             header('location: index.php?action=home');
     }

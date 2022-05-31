@@ -114,8 +114,8 @@
                         </button>
                     </a>
                 <?php } ?>
-                <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
-                <i class="bi bi-list mobile-nav-toggle"></i>
+                <a href="#" class="mx-2 js-search-open"><span class=""></span></a>
+                <i class=""></i>
 
                 <!-- ======= Search Form ======= -->
                 <div class="search-form-wrap js-search-form-wrap">
