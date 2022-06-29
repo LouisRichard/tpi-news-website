@@ -1,6 +1,9 @@
 # tpi-news-website
 TPI - News website done is the context of my CS studies
 
+# Introduction
+This project is my last exam of my formation.
+
 [IceScrum](https://icescrum.cpnv.ch/p/NEWSWEBSIT/#/project)
 
 ## Software Used
